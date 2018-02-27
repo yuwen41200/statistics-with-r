@@ -1,0 +1,51 @@
+---
+title: "Hello World"
+author: "no_name"
+date: "2018-02-27"
+output:
+  html_document: default
+  pdf_document: default
+  word_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r chinese}
+Sys.setlocale(category = "LC_ALL", locale = "cht")
+```
+
+```{r}
+foo <- c("中文", "測試", "可以", "輸出")
+foo
+```
+
+```{r}
+foo <- foo[foo != "中文"]
+foo
+```
+
+```{r}
+foo <- c(foo, "新增")
+foo
+```
+
+```{r}
+bar <- c(10, 20, 30, 40)
+bar
+```
+
+```{r}
+foobar <- data.frame(name = foo, age = bar)
+foobar
+```
+
+```{r}
+foobar$other <- c("a", "b", "c", "d")
+foobar
+```
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```

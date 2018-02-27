@@ -1,2 +1,2 @@
-# statistics-with-r
+# Statistics with R
 Statistics Using R Programming Language
