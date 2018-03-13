@@ -1,0 +1,118 @@
+---
+title: "第三週課堂練習"
+author: "蒲郁文"
+date: "2018-03-13"
+output:
+  github_document: default
+  html_document: default
+  pdf_document: default
+  word_document: default
+---
+
+## 設定環境
+
+Hint: Markdown Cheatsheet  
+https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet
+
+```{r setup}
+knitr::opts_chunk$set(echo = TRUE)  # 是否顯示程式碼
+```
+
+```{r chinese}
+Sys.getlocale(category = "LC_ALL")
+Sys.setlocale(category = "LC_ALL", locale = "zh_TW.UTF-8")
+```
+
+```{r test_echo_option, echo=FALSE}
+x <- 30
+x  # 由於 echo=FALSE，此區塊的程式碼不會顯示，但仍會執行並顯示輸出
+```
+
+```{r test_include_option, include=FALSE}
+x <- 60
+x  # 由於 include=FALSE，此區塊的程式碼與輸出皆不會顯示，但仍會執行
+```
+
+## 讀入資料集
+
+Hint: read.table(file, header = FALSE, sep = "", quote = "\"'", row.names, na.strings = "NA")  
+The default separator is ‘white space’, that is one or more spaces, tabs, newlines or carriage returns.
+
+```{r}
+mental_rotation <- read.table("Tab3-1.dat", header = TRUE)
+names(mental_rotation)
+dim(mental_rotation)
+head(mental_rotation)
+```
+
+## 畫直方圖
+
+```{r}
+par(family="STHeiti")  # 設定中文字型
+seq(from = 0, to = 50, by = 10)
+hist(mental_rotation$RTsec, breaks = seq(from = 0, to = 5, by = 0.1), xlim = c(0, 5),
+     main = "反應時間的直方圖", xlab = "反應時間（單位：秒）", ylab = "次數",
+     xaxt = "n", yaxt = "n")  # 不顯示 x、y 軸
+axis(1, at = seq(from = 0, to = 5, by = 1), pos = 0, las = 0)
+axis(2, at = seq(from = 0, to = 50, by = 10), pos = 0, las = 0)
+```
+
+## 基本 data frame 語法
+
+```{r}
+foo <- c("中文", "測試", "可以", "輸出")
+foo
+```
+
+```{r}
+foo <- foo[foo != "中文"]
+foo
+```
+
+```{r}
+foo <- c(foo, "新增")
+foo
+```
+
+```{r}
+bar <- c(10, 20, 30, 40)
+bar
+```
+
+```{r}
+foobar <- data.frame(name = foo, age = bar)
+foobar
+```
+
+```{r}
+foobar$other <- c("a", "b", "c", "d")
+foobar
+```
+
+## 基本運算與繪圖
+
+```{r}
+12*3+sqrt(25)
+```
+
+```{r}
+r <- 10
+pi*r^2
+```
+
+```{r}
+year <- c(2005, 2008, 2012, 2018)
+plot(year, bar, pch = 16)
+plot(bar~year)
+```
+
+```{r}
+png("test.png", width = 800, units = "px")
+plot(pressure)
+dev.off()
+```
+
+```{r}
+rm(x)
+ls()
+```
