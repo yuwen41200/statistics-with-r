@@ -57,6 +57,48 @@ axis(1, at = seq(from = 0, to = 5, by = 1), pos = 0, las = 0)
 axis(2, at = seq(from = 0, to = 50, by = 10), pos = 0, las = 0)
 ```
 
+## 畫莖葉圖
+
+```{r}
+stem(mental_rotation$RTsec, scale = .5)
+```
+
+```{r}
+stem(mental_rotation$RTsec, scale = 1)
+```
+
+```{r}
+stem(mental_rotation$RTsec, scale = 2)
+```
+
+## 畫背靠背莖葉圖
+
+```{r}
+# total_points <- read.table(file.choose(), header = TRUE)
+total_points <- read.table("Fig3-4.dat", header = TRUE)
+names(total_points)
+dim(total_points)
+str(total_points)
+tail(total_points)
+```
+
+```{r}
+rarely_attend <- total_points$Points[total_points$Attend == 1]
+names(rarely_attend)
+dim(rarely_attend)
+head(rarely_attend)
+```
+
+```{r}
+regularly_attend <- total_points$Points[total_points$Attend == 2]
+head(regularly_attend)
+```
+
+```{r}
+library(aplpack)
+stem.leaf.backback(rarely_attend, regularly_attend)
+```
+
 ## 基本 data frame 語法
 
 ```{r}
