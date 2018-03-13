@@ -268,6 +268,36 @@ stem.leaf.backback(rarely_attend, regularly_attend)
     ## n:             24      48           
     ## ________________________________________
 
+畫折線圖
+--------
+
+``` r
+# colors()  # 列出支援的顏色
+```
+
+``` r
+freq <- c(4.8, 4.8, 4.9, 4.4, 5.4, 4.8, 3.6, 4.1, 3.4, 3.7, 2.9)
+freq
+```
+
+    ##  [1] 4.8 4.8 4.9 4.4 5.4 4.8 3.6 4.1 3.4 3.7 2.9
+
+``` r
+age <- c(8:18)  # [8, 18]
+age
+```
+
+    ##  [1]  8  9 10 11 12 13 14 15 16 17 18
+
+``` r
+par(family="STHeiti")
+plot(freq~age, type = "l", ylim = c(2, 6),
+     xlab = "年齡", ylab = "平均次數",
+     col = "blue", lwd = 3)
+```
+
+![](intro_files/figure-markdown_github/unnamed-chunk-12-1.png)
+
 基本 data frame 語法
 --------------------
 
@@ -342,13 +372,13 @@ year <- c(2005, 2008, 2012, 2018)
 plot(year, bar, pch = 16)
 ```
 
-![](intro_files/figure-markdown_github/unnamed-chunk-18-1.png)
+![](intro_files/figure-markdown_github/unnamed-chunk-21-1.png)
 
 ``` r
 plot(bar~year)
 ```
 
-![](intro_files/figure-markdown_github/unnamed-chunk-18-2.png)
+![](intro_files/figure-markdown_github/unnamed-chunk-21-2.png)
 
 ``` r
 png("test.png", width = 800, units = "px")
@@ -364,6 +394,7 @@ rm(x)
 ls()
 ```
 
-    ## [1] "bar"              "foo"              "foobar"          
-    ## [4] "mental_rotation"  "r"                "rarely_attend"   
-    ## [7] "regularly_attend" "total_points"     "year"
+    ##  [1] "age"              "bar"              "foo"             
+    ##  [4] "foobar"           "freq"             "mental_rotation" 
+    ##  [7] "r"                "rarely_attend"    "regularly_attend"
+    ## [10] "total_points"     "year"
