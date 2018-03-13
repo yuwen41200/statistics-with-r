@@ -1,0 +1,62 @@
+---
+title: "第三週課堂作業"
+author: "蒲郁文"
+date: "2018-03-13"
+output:
+  html_document: default
+  github_document: default
+  pdf_document: default
+  word_document: default
+---
+
+## 設定環境
+
+```{r}
+knitr::opts_chunk$set(echo = TRUE)  # 是否顯示程式碼
+```
+
+```{r}
+Sys.setlocale(category = "LC_ALL", locale = "zh_TW.UTF-8")
+```
+
+## 讀入資料集
+
+```{r}
+df <- read.table("que.dat", header = TRUE)
+names(df)
+dim(df)
+str(df)
+head(df)
+```
+
+## 畫直方圖
+
+```{r}
+par(family="STHeiti")  # 設定中文字型
+hist(df$age, breaks = seq(from = 0, to = 70, by = 1), xlim = c(0, 70),
+     main = "大家覺得老師幾歲？", xlab = "年齡（單位：歲）", ylab = "人數",
+     xaxt = "n", yaxt = "n")  # 不顯示 x、y 軸
+axis(1, at = seq(from = 0, to = 70, by = 10), pos = 0, las = 0)
+axis(2, at = seq(from = 0, to = 10, by = 1), pos = 0, las = 0)
+```
+
+## 畫莖葉圖
+
+```{r}
+stem(df$age, scale = .5)
+```
+
+## 畫背靠背莖葉圖
+
+```{r}
+female <- df$age[df$gender == 1]
+```
+
+```{r}
+male <- df$age[df$gender == 2]
+```
+
+```{r}
+library(aplpack)
+stem.leaf.backback(female, male)
+```
