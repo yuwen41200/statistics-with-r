@@ -1,0 +1,59 @@
+---
+title: "Exercise 2"
+output:
+  pdf_document:
+    includes:
+      in_header: header.tex
+    keep_tex: yes
+    latex_engine: xelatex
+  html_document:
+    df_print: paged
+---
+
+##### 3.1 (a)
+
+```{r}
+scores <- c(54, 52, 51, 50, 36, 55, 44, 46, 57, 44, 43, 52, 38, 46,
+            55, 34, 44, 39, 43, 36, 55, 57, 36, 46, 49, 46, 49, 47)
+```
+
+```{r}
+hist(scores)
+```
+
+##### 3.1 (b)
+
+類似倒 U 字型。
+
+##### 3.2
+
+```{r}
+stem(scores, scale = .5)
+```
+
+##### 3.4
+
+```{r}
+summary(scores)
+```
+
+有，平均分數是 46.57 分，高於 20 分。
+
+##### 3.5 (a)
+
+有，在 Passage 組有很多人 70 分以上，在 NoPassage 組則沒有人超過 70 分。
+
+##### 3.5 (b)
+
+```{r}
+new_scores <- c(66, 75, 72, 71, 55, 56, 72, 93, 73, 72, 72, 73, 91, 66, 71, 56, 59)
+```
+
+```{r}
+library(aplpack)
+stem.leaf.backback(new_scores, scores)
+```
+
+##### 3.5 (c)
+
+有看文章段落的人的分數明顯比沒看的人來得高。
