@@ -1,0 +1,30 @@
+---
+title: "第四週課堂作業"
+author: "0316213 蒲郁文"
+date: "2018-03-20"
+output: html_document
+---
+
+## Read Dataset
+
+```{r}
+df <- read.table("../week3a/que.dat", header = TRUE)
+head(df)
+table(df$gender)
+```
+
+## factor()
+
+```{r}
+df$gender <- factor(df$gender, ordered = FALSE, levels = c(1, 2), labels = c("女", "男"))
+                    # 無順序性，1 代表女性，2 代表男性
+head(df)
+```
+
+## Draw Boxplot
+
+```{r}
+par(family="STHeiti")  # 設定中文字型
+boxplot(df$age ~ df$gender, main = "大家覺得老師幾歲？",
+        ylab = "年齡（單位：歲）", col = c("green", "yellow"))
+```
