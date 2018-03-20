@@ -1,5 +1,6 @@
 ---
 title: "Exercise 2"
+author: "0316213 Yu-Wen Pu"
 output:
   pdf_document:
     includes:
@@ -57,3 +58,30 @@ stem.leaf.backback(new_scores, scores)
 ##### 3.5 (c)
 
 有看文章段落的人的分數明顯比沒看的人來得高。
+
+##### 3.22 & 3.23
+
+```{r}
+total_households <- c(52799, 63401, 71120, 80776, 86789, 89479, 91066, 92830, 92347)
+women_households <- c(4507, 5591, 7242, 8705, 10129, 10445, 10608, 10890, 10890)
+family_size <- c(3.33, 3.14, 2.94, 2.76, 2.69, 2.66, 2.64, 2.62, 2.63)
+year <- c(1960, 1970, 1975, 1980, 1985, 1987, 1988, 1989, 1990)
+```
+
+```{r}
+plot(total_households ~ year, type = "l", ylim = c(0, 100000),
+     ylab = "Total Households", col = "red", lwd = 3)
+par(new = TRUE)
+plot(women_households ~ year, type = "l", ylim = c(0, 100000),
+     ylab = "", col = "blue", lwd = 3, axes = FALSE)
+mtext("Women Households", side = 4, col = "blue")
+axis(side = 4, ylim = c(0, 100000), col = "blue", col.axis = "blue")
+```
+
+```{r}
+plot(family_size ~ year, type = "l", ylim = c(2, 4),
+     ylab = "Family Size", col = "red", lwd = 3)
+```
+
+1. 女性領導的家庭增加的幅度不如家庭總數增加的幅度。也就是說，雖然家庭的數量增加了，但多數家庭仍是由非女性（通常是男性）領導。
+2. 家庭大小有朝向小家庭發展的趨勢。
