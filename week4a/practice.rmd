@@ -1,0 +1,54 @@
+---
+title: "Week 4 Practice 1"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+set.seed(1830)
+```
+
+## Central Tendency
+
+```{r}
+nums <- sample(30:60, 24, replace=TRUE)
+cat(nums)
+```
+
+```{r}
+summary(nums)
+```
+
+```{r}
+m <- mean(nums)
+m.trim <- mean(nums, trim = .1)
+med <- median(nums)
+cat(m, m.trim, med)
+```
+
+```{r nums_hist}
+hist(nums, main = "Title Goes Here", breaks = 20, col = "red")
+```
+
+```{r}
+library("psych")
+describe(nums)
+```
+
+## Data Types
+
+```{r}
+scalar_var1 <- 6
+scalar_var2 <- "STRING"
+scalar_var3 <- TRUE
+```
+
+```{r}
+vector_var1 <- c(1, 3, 5, 7, 9)
+vector_var2 <- c("apple", "boy", "cat", "dog", 'egg', 'fox', 'girl')
+vector_var3 <- c(61:70)
+vector_var1[3]  # 索引值從 1 開始
+vector_var2[c(2, 4, 6)]
+vector_var3[7:10]  # 包含頭尾
+vector_var3[11]  # 不存在，NA
+```
