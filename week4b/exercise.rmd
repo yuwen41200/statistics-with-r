@@ -11,13 +11,17 @@ output:
     df_print: paged
 ---
 
+```{r}
+knitr::opts_chunk$set(results = "hold")  #, fig.retina = 2)
+```
+
 ##### 4.1
 
 ```{r}
 new_scores <- c(66, 75, 72, 71, 55, 56, 72, 93, 73, 72, 72, 73, 91, 66, 71, 56, 59)
 sort(table(new_scores), decreasing = TRUE)
-cat("從上表，我們可以得知 mode 為 72。")
-cat("median = ", median(new_scores), ", mean = ", mean(new_scores), sep = "")
+cat("從上表，我們可以得知 mode 為 72。", fill = TRUE)
+cat("median = ", median(new_scores), ", mean = ", mean(new_scores), sep = "", fill = TRUE)
 ```
 
 ##### 4.4
@@ -26,8 +30,8 @@ cat("median = ", median(new_scores), ", mean = ", mean(new_scores), sep = "")
 set.seed(1830)
 nums <- sample(0:100, 10, replace = TRUE)
 nums <- c(nums, 2000)
-cat(nums)
-cat("mean = ", mean(nums), ", median = ", median(nums), sep = "")
+cat(nums, fill = TRUE)
+cat("mean = ", mean(nums), ", median = ", median(nums), sep = "", fill = TRUE)
 ```
 
 ##### 4.5
@@ -36,8 +40,8 @@ cat("mean = ", mean(nums), ", median = ", median(nums), sep = "")
 nums <- sample(1:20, 50, replace = TRUE)
 nums <- c(nums, sample(21:100, 50, replace = TRUE))
 hist(nums, breaks = seq(from = 0, to = 100, by = 1))
-cat("mean = ", mean(nums), ", median = ", median(nums), sep = "")
-cat("mean 大於 median。")
+cat("mean = ", mean(nums), ", median = ", median(nums), sep = "", fill = TRUE)
+cat("mean 大於 median。", fill = TRUE)
 ```
 
 ##### 4.8
@@ -47,10 +51,10 @@ library(purrr)
 const <- 5
 old_nums <- c(8, 7, 12, 14, 3, 7)
 new_nums <- map_dbl(old_nums, ~ . - const)
-cat("Original:", old_nums)
-cat("mean = ", mean(old_nums), ", median = ", median(old_nums), sep = "")
-cat("New:", new_nums)
-cat("mean = ", mean(new_nums), ", median = ", median(new_nums), sep = "")
+cat("Original:", old_nums, fill = TRUE)
+cat("mean = ", mean(old_nums), ", median = ", median(old_nums), sep = "", fill = TRUE)
+cat("New:", new_nums, fill = TRUE)
+cat("mean = ", mean(new_nums), ", median = ", median(new_nums), sep = "", fill = TRUE)
 ```
 
 ##### 4.9
@@ -58,18 +62,68 @@ cat("mean = ", mean(new_nums), ", median = ", median(new_nums), sep = "")
 ```{r}
 old_nums <- c(8, 3, 5, 5, 6, 2)
 new_nums <- map_dbl(old_nums, ~ . * const)
-cat("Original:", old_nums)
-cat("mean = ", mean(old_nums), ", median = ", median(old_nums), sep = "")
-cat("New:", new_nums)
-cat("mean = ", mean(new_nums), ", median = ", median(new_nums), sep = "")
+cat("Original:", old_nums, fill = TRUE)
+cat("mean = ", mean(old_nums), ", median = ", median(old_nums), sep = "", fill = TRUE)
+cat("New:", new_nums, fill = TRUE)
+cat("mean = ", mean(new_nums), ", median = ", median(new_nums), sep = "", fill = TRUE)
 ```
 
 ##### 4.17
 
+```{r}
+students <- read.table("../week3a/Fig3-4.dat", header = TRUE)
+skipped <- students$Points[students$Attend == 1]
+attended <- students$Points[students$Attend == 2]
+cat("Attended Class:", fill = TRUE)
+cat("mean = ", mean(attended), ", median = ", median(attended), sep = "", fill = TRUE)
+cat("Skipped Class:", fill = TRUE)
+cat("mean = ", mean(skipped), ", median = ", median(skipped), sep = "", fill = TRUE)
+cat("有上課的同學成績較高。", fill = TRUE)
+```
+
 ##### 4.18
+
+```{r}
+sort(table(attended), decreasing = TRUE)
+sort(table(skipped), decreasing = TRUE)
+```
 
 ##### 5.6
 
+```{r}
+library(purrr)
+const <- 5
+old_nums <- c(8, 7, 12, 14, 3, 5, 2)
+add_nums <- map_dbl(old_nums, ~ . + const)
+sub_nums <- map_dbl(old_nums, ~ . - const)
+cat("Original:", old_nums, fill = TRUE)
+cat("stddev = ", sd(old_nums), ", mean = ", mean(old_nums), sep = "", fill = TRUE)
+cat("Add 5:", add_nums, fill = TRUE)
+cat("stddev = ", sd(add_nums), ", mean = ", mean(add_nums), sep = "", fill = TRUE)
+cat("Subtract 5:", sub_nums, fill = TRUE)
+cat("stddev = ", sd(sub_nums), ", mean = ", mean(sub_nums), sep = "", fill = TRUE)
+cat("將所有數值做加／減運算，標準差不變，平均值跟著加／減。")
+```
+
 ##### 5.7
 
+```{r}
+old_nums <- c(8, 7, 12, 14, 3, 5, 2)
+mul_nums <- map_dbl(old_nums, ~ . * const)
+div_nums <- map_dbl(old_nums, ~ . / const)
+cat("Original:", old_nums, fill = TRUE)
+cat("stddev = ", sd(old_nums), ", mean = ", mean(old_nums), sep = "", fill = TRUE)
+cat("Multiply 5:", mul_nums, fill = TRUE)
+cat("stddev = ", sd(mul_nums), ", mean = ", mean(mul_nums), sep = "", fill = TRUE)
+cat("Divide 5:", div_nums, fill = TRUE)
+cat("stddev = ", sd(div_nums), ", mean = ", mean(div_nums), sep = "", fill = TRUE)
+cat("將所有數值做乘／除運算，標準差、平均值都會跟著乘／除。")
+```
+
 ##### 5.12
+
+```{r}
+new_scores <- c(66, 75, 72, 71, 55, 56, 72, 93, 73, 72, 72, 73, 91, 66, 71, 56, 59)
+par(family="STHeiti")
+boxplot(new_scores, ylab = "成績")
+```
