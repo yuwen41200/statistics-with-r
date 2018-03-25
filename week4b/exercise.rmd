@@ -1,0 +1,75 @@
+---
+title: "Exercise 3"
+author: "0316213 Yu-Wen Pu"
+output:
+  pdf_document:
+    includes:
+      in_header: ../week3b/header.tex
+    keep_tex: yes
+    latex_engine: xelatex
+  html_document:
+    df_print: paged
+---
+
+##### 4.1
+
+```{r}
+new_scores <- c(66, 75, 72, 71, 55, 56, 72, 93, 73, 72, 72, 73, 91, 66, 71, 56, 59)
+sort(table(new_scores), decreasing = TRUE)
+cat("從上表，我們可以得知 mode 為 72。")
+cat("median = ", median(new_scores), ", mean = ", mean(new_scores), sep = "")
+```
+
+##### 4.4
+
+```{r}
+set.seed(1830)
+nums <- sample(0:100, 10, replace = TRUE)
+nums <- c(nums, 2000)
+cat(nums)
+cat("mean = ", mean(nums), ", median = ", median(nums), sep = "")
+```
+
+##### 4.5
+
+```{r}
+nums <- sample(1:20, 50, replace = TRUE)
+nums <- c(nums, sample(21:100, 50, replace = TRUE))
+hist(nums, breaks = seq(from = 0, to = 100, by = 1))
+cat("mean = ", mean(nums), ", median = ", median(nums), sep = "")
+cat("mean 大於 median。")
+```
+
+##### 4.8
+
+```{r}
+library(purrr)
+const <- 5
+old_nums <- c(8, 7, 12, 14, 3, 7)
+new_nums <- map_dbl(old_nums, ~ . - const)
+cat("Original:", old_nums)
+cat("mean = ", mean(old_nums), ", median = ", median(old_nums), sep = "")
+cat("New:", new_nums)
+cat("mean = ", mean(new_nums), ", median = ", median(new_nums), sep = "")
+```
+
+##### 4.9
+
+```{r}
+old_nums <- c(8, 3, 5, 5, 6, 2)
+new_nums <- map_dbl(old_nums, ~ . * const)
+cat("Original:", old_nums)
+cat("mean = ", mean(old_nums), ", median = ", median(old_nums), sep = "")
+cat("New:", new_nums)
+cat("mean = ", mean(new_nums), ", median = ", median(new_nums), sep = "")
+```
+
+##### 4.17
+
+##### 4.18
+
+##### 5.6
+
+##### 5.7
+
+##### 5.12
