@@ -85,8 +85,14 @@ cat("有上課的同學成績較高。", fill = TRUE)
 
 ```{r}
 sort(table(attended), decreasing = TRUE)
+cat("有上課的同學的成績的 mode 為 264。", fill = TRUE)
 sort(table(skipped), decreasing = TRUE)
+cat("沒上課的同學的成績的 mode 為 256。", fill = TRUE)
 ```
+
+雖然有上課的同學的成績的 mode 仍然較高，但用 mode 來代表一個群體的成績是不恰當的。  
+假如我的成績分佈是 *(0, 0, 0, 85, 90, 90, 95, 95, 100, 100)*，則 mode 會是 *0*，  
+但顯然 *0* 不應該被用來代表這群學生的成績。
 
 ##### 5.6
 
@@ -124,6 +130,5 @@ cat("將所有數值做乘／除運算，標準差、平均值都會跟著乘／
 
 ```{r}
 new_scores <- c(66, 75, 72, 71, 55, 56, 72, 93, 73, 72, 72, 73, 91, 66, 71, 56, 59)
-par(family="STHeiti")
-boxplot(new_scores, ylab = "成績")
+boxplot(new_scores, ylab = "Score")
 ```
