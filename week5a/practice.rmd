@@ -1,0 +1,17 @@
+---
+title: "Week 5 Practice 1"
+author: "Yu-Wen Pu"
+date: "2018/3/27"
+output: github_document
+---
+
+## Normal Distribution
+
+```{r}
+dnorm(x = 1, mean = 0, sd = 1)  # density
+rnorm(n = 10, mean = 0, sd = 1)  # random generation
+pnorm(2, mean = 0, sd = 1)  # distribution function
+pnorm(-1, mean = 0, sd = 1)
+test <- pnorm(-1, mean = 0, sd = 1)
+qnorm(test, mean = 0, sd = 1)  # quantile function
+```
