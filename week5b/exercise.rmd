@@ -1,0 +1,75 @@
+---
+title: "Exercise 4"
+author: "0316213 Yu-Wen Pu"
+date: "2018-04-01"
+output:
+  pdf_document:
+    includes:
+      in_header: ../week3b/header.tex
+    latex_engine: xelatex
+---
+
+```{r}
+knitr::opts_chunk$set(results = "hold")
+```
+
+```{r}
+# population standard deviation
+pop_sd <- function(vec){
+    ((sd(vec) ^ 2) * (length(vec) - 1) / length(vec)) ^ 0.5
+}
+```
+
+##### 6.1
+
+```{r}
+X <- c(1, 2, 2, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 6, 6, 7)
+plot(density(X), main = "Distribution of X")
+```
+
+```{r}
+X2 = X - mean(X)
+X2
+```
+
+```{r}
+X3 = X2 / pop_sd(X)
+X3
+```
+
+##### 6.2
+
+```{r}
+cat("z score of", 2.5, "is", (2.5 - mean(X)) / pop_sd(X), fill = TRUE)
+cat("z score of", 6.2, "is", (6.2 - mean(X)) / pop_sd(X), fill = TRUE)
+cat("z score of", 9, "is", (9 - mean(X)) / pop_sd(X), fill = TRUE)
+```
+
+*2.5* 比平均小約一個標準差；*6.2* 比平均大約一點五個標準差；*9* 比平均大約三個標準差。
+
+##### 6.3
+
+```{r}
+mean_ <- 195
+stddev <- 30
+a <- pnorm(225, mean = mean_, sd = stddev) - pnorm(165, mean = mean_, sd = stddev)
+b <- pnorm(195, mean = mean_, sd = stddev)
+c <- pnorm(225, mean = mean_, sd = stddev)
+cat("a)", a, "\nb)", b, "\nc)", c, fill = TRUE)
+```
+
+##### 6.4
+
+```{r}
+ai <- qnorm(.25 , mean = mean_, sd = stddev)
+af <- qnorm(.75 , mean = mean_, sd = stddev)
+b  <- qnorm(.75 , mean = mean_, sd = stddev)
+ci <- qnorm(.025, mean = mean_, sd = stddev)
+cf <- qnorm(.975, mean = mean_, sd = stddev)
+cat("a)", ai, af, "\nb)", b, "\nc)", ci, cf, fill = TRUE)
+```
+
+
+
+
+
