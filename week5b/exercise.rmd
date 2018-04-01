@@ -14,6 +14,10 @@ knitr::opts_chunk$set(results = "hold")
 ```
 
 ```{r}
+set.seed(1830)
+```
+
+```{r}
 # population standard deviation
 pop_sd <- function(vec){
     ((sd(vec) ^ 2) * (length(vec) - 1) / length(vec)) ^ 0.5
@@ -42,7 +46,7 @@ X3
 ```{r}
 cat("z score of", 2.5, "is", (2.5 - mean(X)) / pop_sd(X), fill = TRUE)
 cat("z score of", 6.2, "is", (6.2 - mean(X)) / pop_sd(X), fill = TRUE)
-cat("z score of", 9, "is", (9 - mean(X)) / pop_sd(X), fill = TRUE)
+cat("z score of", 9  , "is", (9   - mean(X)) / pop_sd(X), fill = TRUE)
 ```
 
 *2.5* 比平均小約一個標準差；*6.2* 比平均大約一點五個標準差；*9* 比平均大約三個標準差。
@@ -69,7 +73,48 @@ cf <- qnorm(.975, mean = mean_, sd = stddev)
 cat("a)", ai, af, "\nb)", b, "\nc)", ci, cf, fill = TRUE)
 ```
 
+##### 6.9
 
+```{r}
+qnorm(.9, mean = 50, sd = 10)
+```
 
+##### 6.10
 
+```{r}
+qnorm(.9 , mean = 2000, sd = 400)
+qnorm(.05, mean = 2000, sd = 400)
+```
 
+##### 6.12
+
+$$
+\text{Convert }x\text{ to }x'\text{.}
+$$
+$$
+z=\frac{x-48}{7}
+$$
+$$
+x'=10\times z+80
+$$
+
+##### 6.21
+
+```{r}
+X <- rnorm(1000, 15, 3)
+hist(X, main = "Normally Disrupted Data", xlab = "Score", ylab = "Frequency")
+```
+
+##### 7.2
+
+a) $\frac{1}{1000}$
+
+b) $\frac{1}{1000}$
+
+c) $\frac{2}{1000}$
+
+##### 7.8
+
+$$
+\frac{2}{24}\times\frac{3}{24}=\frac{1}{96}\approx0.01
+$$
