@@ -68,3 +68,43 @@ head(survey)
     ## 4    176        78   male     200    70  4000   1111    no    23      45
     ## 5    181        72   male     200    75   735   5487    no    23      59
     ## 6    181        70   male     100    70   200   8591    no     0      52
+
+畫直方圖、常態分佈曲線、最接近實際值的曲線 - height
+---------------------------------------------------
+
+``` r
+hist(survey$height, breaks = 35, xlim = c(min(survey$heigh), max(survey$heigh)),
+     xlab = "Height", main = "", xaxt = "n", yaxt = "n")
+axis(side = 1, at = seq(from = min(survey$heigh), to = max(survey$heigh), by = 5),
+     pos = 0, las = 0)
+axis(side = 2, pos = min(survey$heigh), las = 2)
+par(new = TRUE)  # 疊加圖形
+x <- seq(from = min(survey$heigh), to = max(survey$heigh), by = .01)
+plot(x, dnorm(x, mean = mean(survey$heigh), sd = sd(survey$heigh)),
+     type = "l", col = "red", xlim = c(min(survey$heigh), max(survey$heigh)),
+     xlab = "", ylab = "", xaxt = "n", yaxt = "n", bty = "n")  # bty = "n": no border
+  # lines() 會疊加在既有圖形上
+lines(density(survey$heigh), col = "blue")  # kernel density estimation
+```
+
+<img src="practice2_files/figure-markdown_github/a-1.png" width="672" />
+
+畫直方圖、常態分佈曲線、最接近實際值的曲線 - random
+---------------------------------------------------
+
+``` r
+hist(survey$random, breaks = 35, xlim = c(min(survey$random), max(survey$random)),
+     xlab = "Random Number", main = "", xaxt = "n", yaxt = "n")
+axis(side = 1, at = seq(from = min(survey$random), to = max(survey$random), by = 500),
+     pos = 0, las = 0)
+axis(side = 2, pos = min(survey$random), las = 2)
+par(new = TRUE)  # 疊加圖形
+x <- seq(from = min(survey$random), to = max(survey$random), by = .1)
+plot(x, dnorm(x, mean = mean(survey$random), sd = sd(survey$random)),
+     type = "l", col = "red", xlim = c(min(survey$random), max(survey$random)),
+     xlab = "", ylab = "", xaxt = "n", yaxt = "n", bty = "n")  # bty = "n": no border
+  # lines() 會疊加在既有圖形上
+lines(density(survey$random), col = "blue")  # kernel density estimation
+```
+
+<img src="practice2_files/figure-markdown_github/b-1.png" width="672" />
