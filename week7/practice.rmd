@@ -26,7 +26,12 @@ hist(y, prob = TRUE, breaks = seq(from = 10, to = 20, by = .25),
      main = "常態分佈", xlab = "Value", ylab = "Density",
      xaxt = "n", yaxt = "n")  # prob = TRUE 也可以換成 freq = FALSE
 axis(side = 1, at = seq(from = 10, to = 20, by = 1), pos = 0, las = 0)
-axis(side = 2, pos = 10, las = 0)
+  # side: 1 below, 2 left, 3 above, 4 right
+  # las: 標籤的方向
+  #      0 parallel to axis, 1 horizontal
+  #      2 perpendicular to axis, 3 vertical
+axis(side = 2, pos = 10, las = 0)  # pos: y 軸要畫在 x 坐標的哪個位置
+  # curve() 裡的變數 x 是自動創建的
 curve(dnorm(x, mean = mean(y), sd = sd(y)), add = TRUE, col = "red", lwd = 2)
 ```
 
@@ -65,7 +70,7 @@ hist(random_nums, xlim = c(-4, 4), main = "Random")
 ```{r}
 scores <- read.table("Fig6-3.dat", header = TRUE)
 head(scores)
-length(scores)
+length(scores$BehavProbTot)
 mean(scores$BehavProbTot)
 sd(scores$BehavProbTot)
 ```

@@ -1,0 +1,35 @@
+---
+title: "Week 7 Practice 2"
+author: "Yu-Wen Pu"
+date: "2018-04-10"
+output: github_document
+---
+
+```{r}
+knitr::opts_chunk$set(results = "hold", fig.retina = 2)
+set.seed(1830)
+```
+
+## 讀入資料，並指定資料型別
+
+```{r}
+survey <- read.table("2018class.csv", header = TRUE, sep = ",", colClasses = c(
+    "numeric", "integer", "factor", "numeric", "numeric",
+    "numeric", "integer", "factor", "integer", "integer"))
+head(survey)
+str(survey)
+```
+
+## Encode Vector as Factor (Category, Enum)
+
+```{r}
+survey$gender <- factor(survey$gender,
+    levels = c(1, 2), labels = c("female", "male"))
+str(survey$gender)
+table(survey$gender)
+survey$smoke <- factor(survey$smoke, ordered = TRUE,
+    levels = c(1, 2), labels = c("no", "yes"))
+str(survey$smoke)
+table(survey$smoke)
+head(survey)
+```
