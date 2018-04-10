@@ -1,0 +1,60 @@
+---
+title: "Week 7 Practice 1"
+author: "Yu-Wen Pu"
+date: "2018-04-10"
+output: github_document
+---
+
+```{r}
+knitr::opts_chunk$set(results = "hold")
+set.seed(1830)
+```
+
+## 生成數值
+
+```{r}
+y <- rnorm(1000, mean = 15, sd = 1)
+mean(y)
+sd(y)
+```
+
+## 畫圖，疊加曲線
+
+```{r}
+par(family = "STSongti-TC-Regular")
+hist(y, prob = TRUE, breaks = seq(from = 10, to = 20, by = .25),
+     main = "常態分佈", xlab = "Value", ylab = "Density",
+     xaxt = "n", yaxt = "n")  # prob = TRUE 也可以換成 freq = FALSE
+axis(side = 1, at = seq(from = 10, to = 20, by = 1), pos = 0, las = 0)
+axis(side = 2, pos = 10, las = 0)
+curve(dnorm(x, mean = mean(y), sd = sd(y)), add = TRUE, col = "red", lwd = 2)
+```
+
+## 使用 par 設定圖形參數，使用 type 設定圖形式樣
+
+```{r}
+x <- seq(from = -5, to = 5, by = .1)
+densities <- dnorm(x)  # defaults to mean = 0, sd = 1
+cumulative_qtys <- pnorm(x)
+random_nums <- rnorm(1000)
+par(mfrow = c(1, 3), mar = c(5, 4, 4, 2))
+  # multiple figures by row, c(row, column)
+  # margin size, c(bottom, left, top, right)
+plot(x, densities, col = "blue", type = "l", lwd = 2,
+     xlab = "Value", ylab = "Density", main = "L type")
+  # type of plot, l: line, p: point, b: both
+plot(x, densities, col = "blue", type = "p", lwd = 2,
+     xlab = "Value", ylab = "Density", main = "P type")
+plot(x, densities, col = "blue", type = "b", lwd = 2,
+     xlab = "Value", ylab = "Density", main = "B type")
+```
+
+
+
+
+
+
+
+
+
+
