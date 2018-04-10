@@ -1,26 +1,29 @@
----
-title: "Week 7 Practice 1"
-author: "Yu-Wen Pu"
-date: "2018-04-10"
-output: github_document
----
+Week 7 Practice 1
+================
+Yu-Wen Pu
+2018-04-10
 
-```{r}
+``` r
 knitr::opts_chunk$set(results = "hold", fig.retina = 2)
 set.seed(1830)
 ```
 
-## 生成數值
+生成數值
+--------
 
-```{r}
+``` r
 y <- rnorm(1000, mean = 15, sd = 1)
 mean(y)
 sd(y)
 ```
 
-## 畫圖，疊加曲線
+    ## [1] 14.98172
+    ## [1] 0.9999644
 
-```{r a}
+畫圖，疊加曲線
+--------------
+
+``` r
 par(family = "STSongti-TC-Regular")
 hist(y, prob = TRUE, breaks = seq(from = 10, to = 20, by = .25),
      main = "常態分佈", xlab = "Value", ylab = "Density",
@@ -30,9 +33,12 @@ axis(side = 2, pos = 10, las = 0)
 curve(dnorm(x, mean = mean(y), sd = sd(y)), add = TRUE, col = "red", lwd = 2)
 ```
 
-## 使用 par 設定圖形參數，使用 type 設定圖形式樣
+<img src="practice_files/figure-markdown_github/a-1.png" width="672" />
 
-```{r b}
+使用 par 設定圖形參數，使用 type 設定圖形式樣
+---------------------------------------------
+
+``` r
 x <- seq(from = -5, to = 5, by = .1)
 densities <- dnorm(x)  # defaults to mean = 0, sd = 1
 cumulative_qtys <- pnorm(x)
@@ -49,9 +55,12 @@ plot(x, densities, col = "blue", type = "b", lwd = 2,
      xlab = "Value", ylab = "Density", main = "B Type")
 ```
 
-## 承上，比較圖形
+<img src="practice_files/figure-markdown_github/b-1.png" width="672" />
 
-```{r c}
+承上，比較圖形
+--------------
+
+``` r
 par(mfrow = c(1, 3), mar = c(5, 4, 5, 4))
 plot(x, densities, col = "green", type = "l", lwd = 2,
      xlab = "Value", ylab = "Probability Density", main = "Probability")
@@ -60,9 +69,12 @@ plot(x, cumulative_qtys, col = "green", type = "l", lwd = 2,
 hist(random_nums, xlim = c(-4, 4), main = "Random")
 ```
 
-## 讀入資料
+<img src="practice_files/figure-markdown_github/c-1.png" width="672" />
 
-```{r}
+讀入資料
+--------
+
+``` r
 scores <- read.table("Fig6-3.dat", header = TRUE)
 head(scores)
 length(scores)
@@ -70,9 +82,21 @@ mean(scores$BehavProbTot)
 sd(scores$BehavProbTot)
 ```
 
-## 畫直方圖、常態分佈曲線、最接近實際值的曲線
+    ##   id BehavProbTot
+    ## 1  1         19.5
+    ## 2  2         21.5
+    ## 3  3         23.5
+    ## 4  4         23.5
+    ## 5  5         23.5
+    ## 6  6         23.5
+    ## [1] 2
+    ## [1] 49.11938
+    ## [1] 10.54786
 
-```{r d}
+畫直方圖、常態分佈曲線、最接近實際值的曲線
+------------------------------------------
+
+``` r
 hist(scores$BehavProbTot, breaks = 35, xlim = c(15, 85),
      xlab = "Scores", main = "", xaxt = "n", yaxt = "n")
 axis(side = 1, at = seq(from = 15, to = 85, by = 5), pos = 0, las = 0)
@@ -85,3 +109,5 @@ plot(x, dnorm(x, mean = mean(scores$BehavProbTot), sd = sd(scores$BehavProbTot))
   # lines() 會疊加在既有圖形上
 lines(density(scores$BehavProbTot), col = "blue")  # kernel density estimation
 ```
+
+<img src="practice_files/figure-markdown_github/d-1.png" width="672" />
