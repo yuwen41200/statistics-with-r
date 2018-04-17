@@ -106,3 +106,113 @@ x$week
     ##  [1]  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20
     ##  [1]  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20
     ##  [1]  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20
+
+Logical Operators in R
+----------------------
+
+``` r
+a <- 1
+b <- "1"
+
+a == b  # implicit type conversion
+a != b
+a < b
+a <= b
+a > b
+a >= b
+```
+
+    ## [1] TRUE
+    ## [1] FALSE
+    ## [1] FALSE
+    ## [1] TRUE
+    ## [1] FALSE
+    ## [1] TRUE
+
+If-Else
+-------
+
+``` r
+if (a == 1) {
+    print("a == 1 is TRUE")
+}
+
+if (a) {
+    print("1 is TRUE")
+}
+
+a <- -1
+if (a) {
+    print("-1 is TRUE")
+}
+
+a <- 0
+if (a) {
+    print("0 is TRUE")
+} else {
+    print("0 is FALSE")
+}
+
+if (FALSE) {
+    print()
+} else if (TRUE) {
+    print("here")
+} else {
+    print()
+}
+```
+
+    ## [1] "a == 1 is TRUE"
+    ## [1] "1 is TRUE"
+    ## [1] "-1 is TRUE"
+    ## [1] "0 is FALSE"
+    ## [1] "here"
+
+Functions
+---------
+
+``` r
+f <- function(x) {
+    cat("x =", x)
+}
+f(82)
+```
+
+    ## x = 82
+
+Loops
+-----
+
+##### for
+
+``` r
+for (i in 1:10) {
+    if (i == 7)  # 可省略括號
+        next  # 相當於 continue
+    cat("i =", i, "\n")
+}
+```
+
+    ## i = 1 
+    ## i = 2 
+    ## i = 3 
+    ## i = 4 
+    ## i = 5 
+    ## i = 6 
+    ## i = 8 
+    ## i = 9 
+    ## i = 10
+
+##### while
+
+``` r
+i <- 1
+while (i <= 3) {
+    cat("i =", i, "\n")
+    i <- i + 1
+}
+```
+
+    ## i = 1 
+    ## i = 2 
+    ## i = 3
