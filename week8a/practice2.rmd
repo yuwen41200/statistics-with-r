@@ -1,0 +1,66 @@
+---
+title: "Week 8 Practice 2"
+author: "Yu-Wen Pu"
+date: "2018-04-17"
+output: github_document
+---
+
+```{r}
+knitr::opts_chunk$set(results = "hold", fig.retina = 2)
+set.seed(1830)
+```
+
+## Factor (Category, Enum) Data Type
+
+##### 輸出都一樣
+
+```{r}
+gender <- c("FEMALE", "MALE", "FEMALE", "FEMALE")
+gender
+```
+
+```{r}
+gender1 <- as.factor(gender)
+gender1
+```
+
+```{r}
+(gender2 <- as.factor(gender))
+```
+
+```{r}
+gender3 <- factor(gender)
+gender3
+```
+
+##### 實際用法
+
+```{r}
+x <- c(3, 2, 1, 2, 3, 2, 3, 1, 1, 2, 3, 2, 3, 1)
+x <- factor(x, ordered = TRUE, levels = c(1, 2, 3), labels = c("LOW", "MEDIAN", "HIGH"))
+x
+```
+
+##### 計算次數
+
+```{r}
+table(x)
+```
+
+## List Data Type
+
+```{r}
+a <- "a sample string"
+b <- c(1:20)
+c <- matrix(1:12, nrow = 4)
+d <- c("xxx", "yyyy", "zzzzz")
+x <- list(title = a, week = b, c, d)
+x
+```
+
+```{r}
+x[2]  # 傳回值和相關資訊
+x[[2]]  # 只傳回值
+x[["week"]]
+x$week
+```

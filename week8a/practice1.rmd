@@ -1,0 +1,58 @@
+---
+title: "Week 8 Practice 1"
+author: "Yu-Wen Pu"
+date: "2018-04-17"
+output: github_document
+---
+
+```{r}
+knitr::opts_chunk$set(results = "hold", fig.retina = 2)
+set.seed(1830)
+```
+
+## Normal Distribution
+
+```{r}
+dnorm(x = 1, mean = 0, sd = 1)  # density
+rnorm(n = 10, mean = 0, sd = 1)  # random generation
+pnorm(2, mean = 0, sd = 1)  # distribution function
+pnorm(-1, mean = 0, sd = 1)
+test <- pnorm(-1, mean = 0, sd = 1)
+qnorm(test, mean = 0, sd = 1)  # quantile function
+```
+
+## Binominal Distribution
+
+請十個人猜他喝到的飲料是我們的品牌還是另一家知名品牌。  
+（其實消費者根本就分不出來，只是隨便亂猜。）
+
+```{r a}
+x <- dbinom(x = 0:10, size = 10, prob = .5)
+print(x)
+sum(x)
+barplot(x, names.arg = 0:10)
+```
+
+「十個人當中，至少有五個人選擇我們的品牌」的機率：
+
+```{r}
+1 - pbinom(4, size = 10, prob = .5)
+```
+
+「十個人當中，至少有四個人選擇我們的品牌」的機率：
+
+```{r}
+1 - pbinom(3, size = 10, prob = .5)
+```
+
+「一百人當中，至少有五成的人選擇我們的品牌」的機率：
+
+```{r}
+1 - pbinom(40, size = 100, prob = .5)
+```
+
+「一百人當中，至少有四成的人選擇我們的品牌」的機率：
+
+```{r}
+1 - pbinom(30, size = 100, prob = .5)
+```
