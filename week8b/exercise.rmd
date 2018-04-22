@@ -1,0 +1,43 @@
+---
+title: "Exercise 5"
+author: "0316213 Yu-Wen Pu"
+date: "2018-04-22"
+output:
+  pdf_document:
+    includes:
+      in_header: ../week3b/header.tex
+    latex_engine: xelatex
+---
+
+```{r}
+knitr::opts_chunk$set(results = "hold", fig.retina = 2)
+set.seed(1830)
+```
+
+##### 7.1
+
++ analytic probability: 擲銅板時，由於就只會有正面朝上和反面朝上兩種結果，而且正、反面朝上的機會都是一樣的，因此正、反面朝上的機率都是５０％。
++ frequentistic probability: 一副撲克牌一共有５２張，其中有１３張是紅心；因此從一副混亂的撲克牌中隨機抽一張牌，抽中紅心的機率是２５％。
++ subjective probability: 我憑直覺相信，連續擲五次銅板，得到ＨＴＴＨＴ的機率會比得到ＨＨＨＨＨ的機率高一些。
+
+##### 7.6
+
+joint probability: 甲和乙依序從一副撲克牌中隨機抽一張牌，則甲和乙都抽中紅心的機率是多少？
+
+##### 7.7
+
+conditional probability: 甲和乙依序從一副撲克牌中隨機抽一張牌，假如我已經知道甲抽中紅心，則乙也抽中紅心的機率是多少？
+
+##### 7.12
+
+continuous distribution: 全臺小學六年級孩童的身高。
+
+##### 7.15
+
+假如一位申請人有錄取，他／她的成績必需高於第八十百分位數，也就是說，他／她的成績必需落在前 $\frac{20}{100}$。共有 $100$ 人成績符合這個門檻，其中只有 $10$ 人能錄取，也就是說，達到門檻的人當中只有 $\frac{10}{100}$ 會被錄取。因此，一位申請人被錄取的機率是：
+
+$$
+\frac{20}{100}\times\frac{10}{100}=\frac{1}{5}\times\frac{1}{10}=\frac{1}{50}=0.02
+$$
+
+##### 7.16
