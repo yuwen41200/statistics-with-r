@@ -16,8 +16,8 @@ set.seed(1830)
 
 ##### 7.1
 
-+ analytic probability: 擲銅板時，由於就只會有正面朝上和反面朝上兩種結果，而且正、反面朝上的機會都是一樣的，因此正、反面朝上的機率都是５０％。
-+ frequentistic probability: 一副撲克牌一共有５２張，其中有１３張是紅心；因此從一副混亂的撲克牌中隨機抽一張牌，抽中紅心的機率是２５％。
++ analytic probability: 一副撲克牌共有 $52$ 張，其中有 $13$ 張是紅心；因此從一副完全混亂的撲克牌中隨機抽一張牌，抽中紅心的機率是 $25\%$。
++ frequentistic probability: 甲經常約乙見面討論工作，過去十次約會，有九次乙都遲到，則下次約會乙又遲到的機率即為 $90\%$。
 + subjective probability: 我憑直覺相信，連續擲五次銅板，得到ＨＴＴＨＴ的機率會比得到ＨＨＨＨＨ的機率高一些。
 
 ##### 7.6
@@ -41,3 +41,48 @@ $$
 $$
 
 ##### 7.16
+
+a) 也就是說，他／她的成績高於第八十百分位數。因此：
+
+$$
+p(\text{admitted}\mid\text{highest rating})=\frac{10}{100}=\frac{1}{10}=0.1
+$$
+
+b) 也就是說，他／她的成績低於第八十百分位數。因此：
+
+$$
+p(\text{admitted}\mid\text{lowest rating})=0
+$$
+
+##### 7.22
+
+假如銷售員有較高的機率（頻率）對男顧客推銷跑車，則：
+
++ simple probability: 對顧客推銷跑車的機率；未對顧客推銷跑車的機率；顧客是男性的機率；顧客是女性的機率。
++ joint probability: 「顧客是男性，且對顧客推銷跑車」的機率；「顧客是女性，且對顧客推銷跑車」的機率。
++ conditional probability: 已知顧客是男性，此時銷售員對顧客推銷跑車的機率；已知顧客是女性，此時銷售員對顧客推銷跑車的機率。
+
+看看「已知顧客是男性，此時銷售員對顧客推銷跑車的機率」是否顯著地大於「已知顧客是女性，此時銷售員對顧客推銷跑車的機率」。
+
+##### 7.25
+
+當受害者是白人時，會有比較高比例的檢查官支持判處死刑；若受害者不是白人，則支持判處死刑的檢查官的比例較低。此差異顯示美國當時仍有種族偏見。
+
+##### 7.26
+
+```{r}
+risk_white = 202 / 278
+risk_nonwhite = 388 / 616
+odds_white = 202 / 76
+odds_nonwhite = 388 / 228
+
+risk_ratio = risk_white / risk_nonwhite
+odds_ratio = odds_white / odds_nonwhite
+
+cat("risk ratio (white / non-white) =", risk_ratio, fill = TRUE)
+cat("odds ratio (white / non-white) =", odds_ratio, fill = TRUE)
+```
+
+##### 7.27
+
+在 Vermont，有 $0.43\%$ 的成年人口是非裔。因此假如 jury pool 是公平的、有代表性的，它也應該包含 $0.43\%$ 的非裔。在 jury pool 裡總共有 $2124$ 位 juror 候選人，因此它應該要有 $2124\times0.43\%\approx9$ 位左右的非裔。然而它只有 $4$ 位非裔。假如 jury pool 的成員的選擇是公平的，會發生只有 $4$ 位或不到 $4$ 位非裔的情況的機率只有 $0.05$。因此我們質疑 jury pool 是不公平的。
