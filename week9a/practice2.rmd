@@ -1,0 +1,50 @@
+---
+title: "Week 9 Practice 2"
+author: "Yu-Wen Pu"
+date: "2018-04-24"
+output: github_document
+---
+
+```{r}
+knitr::opts_chunk$set(results = "hold", fig.retina = 2)
+set.seed(1830)
+```
+
+## 資料處理
+
+```{r}
+survey <- read.table("../week7/2018class.csv", header = TRUE, sep = ",")
+str(survey)
+```
+
+```{r}
+survey$tot_money <- survey$haircut + survey$lunch
+str(survey)
+```
+
+```{r}
+survey$hb_level[survey$heartbeat >= 80] <- "high"
+survey$hb_level[survey$heartbeat < 80 & survey$heartbeat > 70] <- "mid"
+survey$hb_level[survey$heartbeat <= 70] <- "low"
+str(survey)
+```
+
+```{r}
+names(survey)[10] <- "prof_age"  # set the names of an object
+str(survey)
+```
+
+```{r}
+survey[, 1:3]
+survey[5:10, ]
+survey[order(survey$height), ]
+```
+
+```{r}
+subset(survey, heartbeat >= 75 & gender == "1", select = haircut:hb_level)
+```
+
+```{r}
+# 隨機抽樣，取後不放回
+survey[sample(1:nrow(survey), 5, replace = FALSE), ]
+```
