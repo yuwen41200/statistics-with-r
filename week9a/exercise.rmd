@@ -1,0 +1,95 @@
+---
+title: "Week 9 Exercise"
+author: "0316213 蒲郁文"
+date: "2018-04-24"
+output: html_document
+---
+
+```{r}
+knitr::opts_chunk$set(results = "hold", fig.retina = 2)
+set.seed(1830)
+```
+
+## 語法說明
+
+```{r eval=FALSE}
+# both are the same
+dataset <- edit(dataset)
+fix(dataset)
+```
+
+```{r eval=FALSE}
+apply(x, margin, fun)
+# x: data object
+# margin: 1 for rows, 2 for columns
+# fun: apply this function to data object
+```
+
+## Q1
+
+```{r}
+survey <- read.table("../week7/2018class.csv", header = TRUE, sep = ",")
+survey$gender <- factor(survey$gender, levels = c(1, 2), labels = c("female", "male"))
+height_of_female <- survey$height[survey$gender == "female"]
+height_of_male <- survey$height[survey$gender == "male"]
+cat("average height of females:", mean(height_of_female), fill = TRUE)
+cat("average height of males:", mean(height_of_male), fill = TRUE)
+```
+
+## Q2
+
+```{r a}
+pop_mean_male <- 172.17
+pop_sd_male <- 5.24
+
+mean_ <- mean(height_of_male)
+if (mean_ > pop_mean_male) {
+    p_val <- format(round(pnorm(mean_, mean = pop_mean_male,
+                                sd = pop_sd_male, lower.tail = FALSE),
+                          digits = 3),
+                    nsmall = 3)
+} else {
+    p_val <- format(round(pnorm(mean_, mean = pop_mean_male,
+                                sd = pop_sd_male, lower.tail = TRUE),
+                          digits = 3),
+                    nsmall = 3)
+}
+
+x <- seq(from = 150, to = 195, by = 0.1)
+plot(x, dnorm(x, mean = pop_mean_male, sd = pop_sd_male), type = "l",
+     main = "male", xlab = "", ylab = "", xaxt = "n", yaxt = "n", bty = "n")
+axis(side = 1, seq(150, 195, 5), pos = 0, las = 0)
+axis(side = 2, seq(0, 0.07, 0.01), pos = 150, las = 2)
+abline(v = mean_, col = "#0099FF", lty = 2, lwd = 3)
+text(x = mean_ + 5, y = 0.07, labels = paste("p =", p_val),
+     font = 2, col = "#0099FF", cex = 1)
+```
+
+## Q3
+
+```{r b}
+pop_mean_male <- 160.00
+pop_sd_male <- 5.30
+
+mean_ <- mean(height_of_female)
+if (mean_ > pop_mean_male) {
+    p_val <- format(round(pnorm(mean_, mean = pop_mean_male,
+                                sd = pop_sd_male, lower.tail = FALSE),
+                          digits = 3),
+                    nsmall = 3)
+} else {
+    p_val <- format(round(pnorm(mean_, mean = pop_mean_male,
+                                sd = pop_sd_male, lower.tail = TRUE),
+                          digits = 3),
+                    nsmall = 3)
+}
+
+x <- seq(from = 140, to = 185, by = 0.1)
+plot(x, dnorm(x, mean = pop_mean_male, sd = pop_sd_male), type = "l",
+     main = "female", xlab = "", ylab = "", xaxt = "n", yaxt = "n", bty = "n")
+axis(side = 1, seq(140, 185, 5), pos = 0, las = 0)
+axis(side = 2, seq(0, 0.07, 0.01), pos = 140, las = 2)
+abline(v = mean_, col = "#0099FF", lty = 2, lwd = 3)
+text(x = mean_ + 5, y = 0.07, labels = paste("p =", p_val),
+     font = 2, col = "#0099FF", cex = 1)
+```
