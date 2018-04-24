@@ -1,0 +1,53 @@
+---
+title: "Week 9 Practice 3"
+author: "Yu-Wen Pu"
+date: "2018-04-24"
+output: github_document
+---
+
+```{r}
+knitr::opts_chunk$set(results = "hold", fig.retina = 2)
+set.seed(1830)
+```
+
+## 假設檢定
+
+```{r a}
+num_of_sample <- 10000
+mean.diff <- numeric(length = num_of_sample)
+stat <- 2.88
+signif_level <- 0.05
+id_of_critical_val <- num_of_sample * signif_level
+for (i in 1:num_of_sample) {
+    sample.wait <- rnorm(n = 100, mean = 35, sd = 15)
+    sample.no_wait <- rnorm(n = 100, mean = 35, sd = 15)
+    mean.diff[i] <- mean(sample.wait) - mean(sample.no_wait)
+}
+mean.diff <- sort(mean.diff, decreasing = TRUE)
+critical_val <- mean.diff[id_of_critical_val]
+critical_val <- round(critical_val, digits = 2)
+hist(mean.diff, breaks = seq(from = -10, to = 10, by = 0.5),
+     ylim = c(0, 1100), main = "sampling dist of diff between means",
+     xlab = "diff between means", ylab = "freq", xaxt = "n")
+axis(side = 1, at = seq(from = -8, to = 8, by = 2), pos = 0, las = 0)
+abline(v = critical_val, col = "#FF0000", lty = 1, lwd = 3)  # lty: line type
+text(x = critical_val + 3, y = 700, labels = paste("critical_val =", critical_val),
+     font = 2, col = "#FF0000", cex = 1)  # font: 1 for plain, 2 for bold, 3 for italic,
+abline(v = stat, col = "#0099FF", lty = 2, lwd = 3)  # 4 for bold italic
+text(x = stat + 2.5, y = 1000, labels = paste("stat =", stat),
+     font = 2, col = "#0099FF", cex = 1)
+summary(mean.diff > stat)
+```
+
+## 常態分佈
+
+```{r b}
+x <- seq(from = 0, to = 100, by = 0.1)
+plot(x, dnorm(x, mean = 50, sd = 10), type = "l",
+     main = "normal dist\nmean = 50, sd = 10",
+     ylab = "density", xaxt = "n", yaxt = "n", bty = "n")
+axis(side = 1, seq(0, 100, 10), pos = 0, las = 0)
+axis(side = 2, pos = 0, las = 0)
+lines(c(49, 49), c(0, dnorm(49, 50, 10)), lty = 2, col = "#009933")
+lines(c(52.3, 52.3), c(0, dnorm(52.3, 50, 10)), lty = 2, col = "#FF0000")
+```
