@@ -1,0 +1,80 @@
+---
+title: "Exercise 6"
+author: "0316213 Yu-Wen Pu"
+date: "2018-05-01"
+output:
+  pdf_document:
+    includes:
+      in_header: ../week3b/header.tex
+    latex_engine: xelatex
+---
+
+```{r}
+knitr::opts_chunk$set(results = "hold", fig.retina = 2)
+set.seed(1830)
+```
+
+##### 8.1
+
+a) null hypothesis: 我說的是 hocky game 的分數。
+b) 因為 hocky game 的分數不可能那麼高，所以這肯定不是 hocky game 的分數。reject null hypothesis。
+
+##### 8.2
+
+a)
+
+```{r}
+x <- seq(from = 3, to = 5, by = .01)
+plot(x, dnorm(x, mean = 4, sd = .25), type = "l",
+     main = "normal dist\nmean = 4, sd = .25", xlab = "expenditure",
+     ylab = "density", xaxt = "n", yaxt = "n", bty = "n")
+axis(side = 1, seq(3, 5, .25), pos = 0, las = 0)
+axis(side = 2, pos = 3, las = 2)
+```
+
+b) No.
+c) 我花了 $4.25，跟平常差不多，還蠻正常的，沒理由擔心。
+
+##### 8.3
+
+Type I error: 我以為我有被多收錢或少收錢，但實際上我沒有。
+
+##### 8.4
+
+Type II error: 我以為我沒有被多收錢或少收錢，但實際上我有。
+
+##### 8.5
+
++ rejection region: 例如最高 5% 或最低 5%，花費落在這個區間，則 reject null hypothesis。
++ critical value: rejection region 的邊界值稱為 critical value。
+
+##### 8.10
+
+sampling error: 樣本估計的統計量的誤差。
+
+##### 8.11
+
++ distribution: 任何變數的分佈。
++ sampling distribution: 任何樣本統計量的分佈。
+
+##### 8.14
+
+```{r}
+round(1 - pnorm(47.48, mean = 50, sd = 7), digits = 2)
+```
+
+##### 8.15
+
+```{r}
+critical <- qnorm(.01, mean = 59, sd = 7)
+round(1 - pnorm(critical, mean = 50, sd = 7), digits = 2)
+```
+
+##### 8.18
+
+1. research hypothesis ($H_1$): 花錢會增加人們繼續看電影的意願。
+2. null hypothesis ($H_0$): 不論有沒有花錢，人們繼續看電影的意願都相同。
+3. 取得有花錢的人的樣本（樣本統計量為 $M$）。
+4. 取得沒花錢的人的 sampling distribution（$H_0$ 為真）。
+5. 計算在 $H_0$ 為真的情況下，樣本統計量不小於 $M$ 的機率（p 值）。
+6. 依據 p 值大小，判斷是否要 reject null hypothesis。
