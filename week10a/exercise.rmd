@@ -1,0 +1,47 @@
+---
+title: "Week 10 Exercise"
+author: "0316213 Yu-Wen Pu"
+date: "2018-05-01"
+output: html_document
+---
+
+## ggplot2
+
+```{r}
+knitr::opts_chunk$set(results = "hold", fig.retina = 2)
+set.seed(1830)
+```
+
+```{r}
+survey <- read.table("../week7/2018class.csv", header = TRUE, sep = ",")
+str(survey)
+```
+
+```{r}
+survey$gender <- factor(survey$gender, levels = c(1, 2), labels = c("female", "male"))
+
+survey$haircutlevel[survey$haircut >= 500] <- "haircut cost ≥ 500"
+survey$haircutlevel[survey$haircut <  500] <- "haircut cost < 500"
+
+survey$stayup[survey$sleep >= 2 & survey$sleep <= 12] <- "stay up"
+survey$stayup[is.na(survey$stayup)] <- "don't stay up"
+
+survey$money[survey$money > 10000] <- mean(survey$money)  # outlier
+
+str(survey)
+table(survey$haircutlevel)
+table(survey$stayup)
+```
+
+```{r a}
+library(ggplot2)
+ggplot(data = survey, aes(x = money, y = lunch, shape = stayup, color = stayup)) +
+    geom_point(size = 1) +
+    # geom_smooth(method = "lm", color = "red", linetype = 3) +
+    facet_grid(gender~haircutlevel) +
+    labs(title = "classmate survey", x = "money in pocket", y = "lunch cost")
+```
+
++ 身上有多少錢與午餐花多少錢沒有顯著的關係。
++ 女生剪頭髮的花費較男生高（因為長髮較短髮貴QQ）。
++ 熬夜並不會讓人午餐吃得比較便宜。
