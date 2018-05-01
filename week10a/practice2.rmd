@@ -12,7 +12,7 @@ knitr::opts_chunk$set(results = "hold", fig.retina = 2)
 set.seed(1830)
 ```
 
-## 範例
+## basic plots
 
 ```{r}
 mtcars <- read.table("mtcars.csv", header = TRUE, sep = ",")
@@ -24,4 +24,63 @@ str(mtcars)
 library(ggplot2)
 ggplot(data = mtcars, aes(x = wt, y = mpg)) + geom_point() +
     labs(title = "automobile data", x = "weight", y = "miles per gallon")
+```
+
+```{r b}
+library(ggplot2)
+ggplot(data = mtcars, aes(x = wt, y = mpg)) + 
+    geom_point(pch = 17, color = "blue", size = 2) +
+    geom_smooth(method = "lm", color = "red", linetype = 2) +
+    labs(title = "automobile data", x = "weight", y = "miles per gallon")
+```
+
+灰底區域表示 95% 信賴區間。
+
+## grouping v.s. faceting
+
+```{r}
+mtcars$am <- factor(mtcars$am, levels = c(0, 1), labels = c("auto", "manual"))
+mtcars$vs <- factor(mtcars$vs, levels = c(0, 1), labels = c("v", "straight"))
+mtcars$cyl <- factor(mtcars$cyl)
+str(mtcars)
+```
+
+```{r c}
+ggplot(data = mtcars, aes(x = hp, y = mpg, shape = cyl, color = cyl)) +
+    geom_point(size = 3) +
+    facet_grid(am~vs) +
+    labs(title = "by engine type", x = "horsepower", y = "miles per gallon")
+```
+
+## geom_* functions
+
+```{r}
+survey <- read.table("../week7/2018class.csv", header = TRUE, sep = ",")
+survey$gender <- factor(survey$gender, levels = c(1, 2), labels = c("F", "M"))
+```
+
+```{r d}
+ggplot(data = survey, aes(x = height)) + geom_histogram(binwidth = 1)
+```
+
+```{r e}
+ggplot(data = survey, aes(x = gender, y = height)) + geom_boxplot()
+```
+
+```{r f}
+ggplot(data = survey, aes(x = gender, y = height)) +
+    geom_boxplot(fill = "cornflowerblue", color = "black", notch = TRUE) +
+    geom_point(position = "jitter", color = "blue", alpha = .5) +
+    geom_rug(sides = "l", color = "green")
+```
+
+```{r g}
+ggplot(data = survey, aes(x = gender, y = height)) +
+    geom_violin(fill = "lightblue") +
+    geom_boxplot(fill = "lightgreen", width = .2)
+```
+
+```{r h}
+ggplot(data = survey, aes(x = height, fill = gender)) +
+    geom_density(alpha = .3)
 ```
