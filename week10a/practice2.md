@@ -131,3 +131,14 @@ ggplot(data = survey, aes(x = height, fill = gender)) +
 ```
 
 <img src="practice2_files/figure-markdown_github/h-1.png" width="672" />
+
+simple regression (linear model)
+--------------------------------
+
+``` r
+plot(survey$height, survey$heartbeat)
+abline(lm(survey$heartbeat~survey$height))
+title("Can height predict heartbeat?")
+```
+
+<img src="practice2_files/figure-markdown_github/i-1.png" width="672" />

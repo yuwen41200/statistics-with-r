@@ -84,3 +84,11 @@ ggplot(data = survey, aes(x = gender, y = height)) +
 ggplot(data = survey, aes(x = height, fill = gender)) +
     geom_density(alpha = .3)
 ```
+
+## simple regression (linear model)
+
+```{r i}
+plot(survey$height, survey$heartbeat)
+abline(lm(survey$heartbeat~survey$height))
+title("Can height predict heartbeat?")
+```
