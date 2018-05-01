@@ -1,0 +1,27 @@
+---
+title: "Week 10 Practice 2"
+author: "Yu-Wen Pu"
+date: "2018-05-01"
+output: github_document
+---
+
+## ggplot2
+
+```{r}
+knitr::opts_chunk$set(results = "hold", fig.retina = 2)
+set.seed(1830)
+```
+
+## 範例
+
+```{r}
+mtcars <- read.table("mtcars.csv", header = TRUE, sep = ",")
+dim(mtcars)
+str(mtcars)
+```
+
+```{r a}
+library(ggplot2)
+ggplot(data = mtcars, aes(x = wt, y = mpg)) + geom_point() +
+    labs(title = "automobile data", x = "weight", y = "miles per gallon")
+```

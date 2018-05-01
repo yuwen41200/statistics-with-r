@@ -4,7 +4,7 @@ Yu-Wen Pu
 2018-05-01
 
 卡方分佈
-========
+--------
 
 ``` r
 knitr::opts_chunk$set(results = "hold", fig.retina = 2)
