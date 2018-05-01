@@ -2,11 +2,7 @@
 title: "Exercise 6"
 author: "0316213 Yu-Wen Pu"
 date: "2018-05-01"
-output:
-  pdf_document:
-    includes:
-      in_header: ../week3b/header.tex
-    latex_engine: xelatex
+output: html_document
 ---
 
 ```{r}
@@ -72,9 +68,9 @@ round(1 - pnorm(critical, mean = 50, sd = 7), digits = 2)
 
 ##### 8.18
 
-1. research hypothesis ($H_1$): 花錢會增加人們繼續看電影的意願。
-2. null hypothesis ($H_0$): 不論有沒有花錢，人們繼續看電影的意願都相同。
-3. 取得有花錢的人的樣本（樣本統計量為 $M$）。
-4. 取得沒花錢的人的 sampling distribution（$H_0$ 為真）。
-5. 計算在 $H_0$ 為真的情況下，樣本統計量不小於 $M$ 的機率（p 值）。
+1. research hypothesis (H1): 花錢會增加人們繼續看電影的意願。
+2. null hypothesis (H0): 不論有沒有花錢，人們繼續看電影的意願都相同。
+3. 取得有花錢的人的樣本（樣本統計量為 M）。
+4. 取得沒花錢的人的 sampling distribution（H0 為真）。
+5. 計算在 H0 為真的情況下，樣本統計量不小於 M 的機率（p 值）。
 6. 依據 p 值大小，判斷是否要 reject null hypothesis。
