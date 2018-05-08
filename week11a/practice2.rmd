@@ -26,3 +26,23 @@ plot(x$Doctors, x$Infmort, xlab = "physicians per 10000 population",
      ylab = "infant mortality", pch = 19)
 abline(lm(x$Infmort ~ x$Doctors), col = "red")
 ```
+
+### part 2
+
+```{r b}
+library(ggplot2)
+scatter <- ggplot(x, aes(x = Doctors, y = Infmort))
+scatter + geom_point() + geom_smooth(method = "lm") +
+    labs(x = "physicians per 10000 population", y = "infant mortality")
+```
+
+```{r c}
+scatter + geom_point() + geom_smooth(method = "lm", color = "red", se = FALSE) +
+    labs(x = "physicians per 10000 population", y = "infant mortality")
+```
+
+```{r d}
+scatter + geom_point() + 
+    geom_smooth(method = "lm", color = "red", alpha = .2, fill = "green") +
+    labs(x = "physicians per 10000 population", y = "infant mortality")
+```

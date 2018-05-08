@@ -40,3 +40,29 @@ abline(lm(x$Infmort ~ x$Doctors), col = "red")
 ```
 
 <img src="practice2_files/figure-markdown_github/a-1.png" width="672" />
+
+### part 2
+
+``` r
+library(ggplot2)
+scatter <- ggplot(x, aes(x = Doctors, y = Infmort))
+scatter + geom_point() + geom_smooth(method = "lm") +
+    labs(x = "physicians per 10000 population", y = "infant mortality")
+```
+
+<img src="practice2_files/figure-markdown_github/b-1.png" width="672" />
+
+``` r
+scatter + geom_point() + geom_smooth(method = "lm", color = "red", se = FALSE) +
+    labs(x = "physicians per 10000 population", y = "infant mortality")
+```
+
+<img src="practice2_files/figure-markdown_github/c-1.png" width="672" />
+
+``` r
+scatter + geom_point() + 
+    geom_smooth(method = "lm", color = "red", alpha = .2, fill = "green") +
+    labs(x = "physicians per 10000 population", y = "infant mortality")
+```
+
+<img src="practice2_files/figure-markdown_github/d-1.png" width="672" />
