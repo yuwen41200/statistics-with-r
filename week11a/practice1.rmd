@@ -1,0 +1,54 @@
+---
+title: "Week 11 Practice 1"
+author: "Yu-Wen Pu"
+date: "2018-05-08"
+output: github_document
+---
+
+## 卡方分佈的修正
+
+```{r}
+knitr::opts_chunk$set(results = "hold", fig.retina = 2)
+set.seed(1830)
+```
+
+### part 1
+
+```{r}
+x <- matrix(c(13, 36, 14, 30), byrow = TRUE, ncol = 2)
+chisq.test(x, correct = FALSE)
+```
+
+```{r}
+chisq.test(x, correct = TRUE)
+```
+
+### part 2
+
+```{r}
+fisher.test(x, alternative = "two.sided")
+```
+
+```{r}
+fisher.test(x, alternative = "greater")
+```
+
+```{r}
+fisher.test(x, alternative = "less")
+```
+
+### part 3
+
+```{r}
+x <- matrix(c(370, 352, 198, 187, 359, 290, 110, 160), byrow = TRUE, nrow = 2,
+            dimnames = list(c("female", "male"), c("blue", "brown", "green", "hazel")))
+x
+```
+
+```{r}
+chisq.test(x, correct = FALSE)
+```
+
+```{r}
+fisher.test(x, alternative = "two.sided")
+```
