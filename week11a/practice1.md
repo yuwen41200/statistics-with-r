@@ -116,3 +116,40 @@ fisher.test(x, alternative = "two.sided")
     ## data:  x
     ## p-value = 0.00101
     ## alternative hypothesis: two.sided
+
+### part 4
+
+``` r
+x <- matrix(c(41, 80, 385, 290, 477, 499), nrow = 2)
+result <- chisq.test(x, correct = FALSE)
+str(result)
+```
+
+    ## List of 9
+    ##  $ statistic: Named num 25.8
+    ##   ..- attr(*, "names")= chr "X-squared"
+    ##  $ parameter: Named int 2
+    ##   ..- attr(*, "names")= chr "df"
+    ##  $ p.value  : num 2.51e-06
+    ##  $ method   : chr "Pearson's Chi-squared test"
+    ##  $ data.name: chr "x"
+    ##  $ observed : num [1:2, 1:3] 41 80 385 290 477 499
+    ##  $ expected : num [1:2, 1:3] 61.7 59.3 344 331 497.4 ...
+    ##  $ residuals: num [1:2, 1:3] -2.631 2.682 2.212 -2.255 -0.913 ...
+    ##  $ stdres   : num [1:2, 1:3] -3.89 3.89 4.01 -4.01 -1.95 ...
+    ##  - attr(*, "class")= chr "htest"
+
+``` r
+result$statistic
+```
+
+    ## X-squared 
+    ##  25.79365
+
+``` r
+result$expected
+```
+
+    ##          [,1]     [,2]     [,3]
+    ## [1,] 61.66084 343.9757 497.3634
+    ## [2,] 59.33916 331.0243 478.6366

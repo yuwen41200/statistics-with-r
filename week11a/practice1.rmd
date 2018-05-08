@@ -52,3 +52,19 @@ chisq.test(x, correct = FALSE)
 ```{r}
 fisher.test(x, alternative = "two.sided")
 ```
+
+### part 4
+
+```{r}
+x <- matrix(c(41, 80, 385, 290, 477, 499), nrow = 2)
+result <- chisq.test(x, correct = FALSE)
+str(result)
+```
+
+```{r}
+result$statistic
+```
+
+```{r}
+result$expected
+```
