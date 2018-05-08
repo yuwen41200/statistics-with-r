@@ -1,0 +1,28 @@
+---
+title: "Week 11 Practice 2"
+author: "Yu-Wen Pu"
+date: "2018-05-08"
+output: github_document
+---
+
+## Correlation
+
+```{r}
+knitr::opts_chunk$set(results = "hold", fig.retina = 2)
+set.seed(1830)
+```
+
+### part 1
+
+```{r}
+x <- read.table("Fig9-1.dat", header = TRUE, sep = "")
+dim(x)
+str(x)
+head(x)
+```
+
+```{r a}
+plot(x$Doctors, x$Infmort, xlab = "physicians per 10000 population",
+     ylab = "infant mortality", pch = 19)
+abline(lm(x$Infmort ~ x$Doctors), col = "red")
+```
