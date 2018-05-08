@@ -46,3 +46,31 @@ scatter + geom_point() +
     geom_smooth(method = "lm", color = "red", alpha = .2, fill = "green") +
     labs(x = "physicians per 10000 population", y = "infant mortality")
 ```
+
+### part 3
+
+```{r}
+x <- read.table("Fig9-5.dat", header = TRUE, sep = "")
+head(x, n = 3)
+cor(x$Pace, x$Heart)
+cor.test(x$Pace, x$Heart)
+```
+
+### part 4
+
+```{r}
+library(haven)
+x <- read_sav("tcs04.sav")
+dim(x)
+```
+
+```{r}
+gender <- table(x$gender)
+gender
+chisq.test(gender)
+```
+
+```{r}
+table(x$P5)
+table(is.na(x$P5))
+```
