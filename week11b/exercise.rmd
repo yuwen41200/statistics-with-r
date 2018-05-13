@@ -5,46 +5,112 @@ date: "2018-05-13"
 output:
   pdf_document:
     includes:
-      in_header: ../week3b/header.tex
+      in_header: ../week03b/header.tex
     latex_engine: xelatex
 ---
 
 ```{r}
-knitr::opts_chunk$set(results = "hold", fig.retina = 2)
+knitr::opts_chunk$set(results = "hold")#, fig.retina = 2)
 set.seed(1830)
 ```
 
 ##### 19.11
 
+```{r}
+x <- matrix(c(22, 187, 19, 74), byrow = TRUE, ncol = 2)
+chisq.test(x, correct = FALSE)
+```
 
+Yes. **ADD classification** and **remedial/nonremedial English enrollment** are not independent. ($\alpha=0.05$)
 
 ##### 19.12
 
+a) See below.
 
+```{r}
+(x <- matrix(c(22, 187, 2, 17, 1, 11, 3, 16,
+               2, 9, 4, 7, 3, 8, 4, 6),
+             byrow = TRUE, ncol = 2))
+```
+
+```{r}
+(result <- chisq.test(x, correct = FALSE))
+```
+
+b) **Exhibition of ADD-like behaviors** and **remedial/nonremedial English enrollment** are not independent. ($\alpha=0.05$)
+
+c) See below.
+
+Expected frequencies:
+
+```{r}
+result$expected
+```
+
+If the expected frequency is small, the observed frequency cannot be normally distributed around it. Thus the chi-square test may be invalid.
+
+Solution: Use Fisher's Exact Test.
+
+```{r}
+fisher.test(x)
+```
+
+Got the same conclusion. ($\alpha=0.05$)
 
 ##### 19.13
 
-
+結果是隨機的，各類別平分 N (sample size, = 41)。**19.12** 的假設是 **Exhibition of ADD-like behaviors** 與 **remedial/nonremedial English enrollment** 彼此獨立。
 
 ##### 9.1
 
+```{r}
+d <- read.table("SubSaharanInfMort.dat", header = TRUE, sep = "",
+                na.strings = "NA", fileEncoding = "ISO-8859-1")
+head(d)
+```
 
+```{r}
+library(ggplot2)
+ggplot(d, aes(x = income, y = infmort)) +
+    geom_point() +
+    geom_smooth(method = "lm", color = "red", se = FALSE) +
+    labs(x = "per capita income (in U.S. dollars)", y = "infant mortality")
+```
+
+effect of outliers: 使負相關更明顯，$r^2$ 更大。
 
 ##### 9.2
 
+```{r}
+rownames(d) <- d$country
+d$country <- NULL
+d[is.na(d)] <- 0  # replace NA with 0
+head(d)
+```
 
+```{r}
+cor(d)
+```
 
 ##### 9.4
 
+```{r}
+cor(d$infmort, d[, names(d) != "infmort"]) ** 2
+```
 
+Per capita income.
 
 ##### 9.5
 
-
+嬰兒死亡率與人均收入成負相關，人均收入愈高，嬰兒死亡率愈低；嬰兒死亡率也與避孕措施的使用率成負相關，避孕措施的使用率愈高，嬰兒死亡率愈低。
 
 ##### 9.6
 
+```{r}
+summary(d)
+```
 
+在撒哈拉以南非洲（Sub-Saharan Africa），相較於年幼產婦的比例（中位數達 $21\%$），高齡產婦的比例不高（中位數僅 $5\%$），因此並非主要的風險來源；但在其他地區，相較於年幼產婦的比例，高齡產婦的比例偏高，因此會是一個風險因子。
 
 ##### 9.7
 
