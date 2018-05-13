@@ -1,0 +1,55 @@
+---
+title: "Exercise 8"
+author: "0316213 Yu-Wen Pu"
+date: "2018-05-13"
+output:
+  pdf_document:
+    includes:
+      in_header: ../week3b/header.tex
+    latex_engine: xelatex
+---
+
+```{r}
+knitr::opts_chunk$set(results = "hold", fig.retina = 2)
+set.seed(1830)
+```
+
+##### 19.11
+
+
+
+##### 19.12
+
+
+
+##### 19.13
+
+
+
+##### 9.1
+
+
+
+##### 9.2
+
+
+
+##### 9.4
+
+
+
+##### 9.5
+
+
+
+##### 9.6
+
+
+
+##### 9.7
+
+
+
+##### 9.8
+
+
