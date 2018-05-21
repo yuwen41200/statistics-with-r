@@ -1,0 +1,49 @@
+---
+title: "Exercise 9"
+author: "0316213 Yu-Wen Pu"
+date: "2018-05-22"
+output:
+  pdf_document:
+    includes:
+      in_header: ../week03b/header.tex
+    latex_engine: xelatex
+---
+
+```{r}
+knitr::opts_chunk$set(results = "hold", fig.retina = 2)
+set.seed(1830)
+```
+
+```{r}
+ttl <- function(x) {
+    paste("##### ", x, "\n", sep = "")
+}
+# e.g. ttl("19.11") outputs "##### 19.11\n"
+```
+
+```{r}
+q <- strsplit("10.1、10.3、10.4、10.5、10.6、10.8、10.9、10.10、10.12、10.13", "、")
+q <- sapply(q, ttl)
+q <- paste(q, collapse = "")
+cat(q)
+```
+
+##### 10.1
+
+##### 10.3
+
+##### 10.4
+
+##### 10.5
+
+##### 10.6
+
+##### 10.8
+
+##### 10.9
+
+##### 10.10
+
+##### 10.12
+
+##### 10.13
