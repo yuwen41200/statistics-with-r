@@ -1,0 +1,51 @@
+---
+title: "Week 13 Practice 1"
+author: "Yu-Wen Pu"
+date: "2018-05-22"
+output: github_document
+---
+
+## regression
+
+```{r}
+knitr::opts_chunk$set(results = "hold", fig.retina = 2)
+set.seed(1830)
+```
+
+### residual
+
+```{r}
+d <- read.table("../week12a/Tab10-1.dat", header = TRUE, sep = "")
+```
+
+```{r}
+sym_avg <- mean(d$Symptoms)
+d$sym_dev <- d$Symptoms - sym_avg
+sum(d$sym_dev)  # almost 0
+```
+
+```{r}
+str_avg <- mean(d$Stress)
+d$str_dev <- d$Stress - str_avg
+sum(d$str_dev)  # almost 0
+```
+
+```{r}
+d$sym_hat <- predict(lm(d$Symptoms ~ d$Stress))
+d$residual <- d$Symptoms - d$sym_hat
+sum(d$residual)  # almost 0
+```
+
+```{r}
+d <- d[order(d$Stress, decreasing = TRUE), ]
+head(d, 4)
+tail(d, 4)
+```
+
+### standardized regression coefficient (beta)
+
+```{r}
+library(boot)
+library(QuantPsyc)
+lm.beta(lm(d$Symptoms ~ d$Stress))
+```
