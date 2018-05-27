@@ -1,0 +1,81 @@
+---
+title: "Week 13 Practice 2"
+author: "Yu-Wen Pu"
+date: "2018-05-28"
+output: github_document
+---
+
+## correlation（補上週課程）
+
+```{r}
+knitr::opts_chunk$set(results = "hold", fig.retina = 2)
+set.seed(1830)
+```
+
+### What is the correlation coefficient between two sets of random numbers?
+
+```{r}
+random_income <- rnorm(25, mean = 0, sd = 1)
+random_musicality <- rnorm(25, mean = 0, sd = 1)
+d <- data.frame(income = random_income, musicality = random_musicality)
+head(d)
+```
+
+```{r}
+(results <- cor.test(d$income, d$musicality))
+correlation <- round(results$estimate, digits = 3)
+p_value <- round(results$p.value, digits = 3)
+```
+
+```{r}
+plot(d$income, d$musicality,
+     main = paste("r = ", correlation, ", p = ", p_value, sep = ""),
+     xlab = "income", ylab = "musicality", pch = 19)
+abline(lm(d$musicality ~ d$income), col = "red")
+```
+
+### Testing the significance of a correlation coefficient
+
+```{r a}
+par(mfrow = c(1, 1))
+number_of_sample <- 1000
+sample_size <- 50
+correlation <- numeric(number_of_sample)
+x_name <- "income"
+y_name <- "musicality"
+hist_break <- 0.02
+interval <- 0.2
+
+for (i in 1:number_of_sample) {
+    x <- rnorm(sample_size, mean = 0, sd = 1)
+    y <- rnorm(sample_size, mean = 0, sd = 1)
+    d <- data.frame(x_name = x, y_name = y)
+    correlation[i] <- cor(d$x_name, d$y_name)
+}
+
+correlation_mean <- round(mean(correlation), digits = 2)
+correlation_sd <- round(sd(correlation), digits = 2)
+
+uplimit <- ceiling(max(correlation) / interval) * interval
+lowlimit <- floor(min(correlation) / interval) * interval
+
+results <- hist(correlation,
+                breaks = seq(from = lowlimit, to = uplimit, by = hist_break),
+                plot = FALSE)
+str(results)
+textbox_x <- uplimit - interval
+textbox_y <- 0.8 * max(results$counts)
+
+hist(correlation, breaks = seq(from = lowlimit, to = uplimit, by = hist_break),
+     xlab = "correlation coefficient", ylab = "frequency",
+     main = "sampling dist. of correlation coefficients",
+     xaxt = "n", yaxt = "n", col = "forestgreen")
+axis(side = 1, at = seq(from = lowlimit, to = uplimit, by = interval),
+     pos = 0, las = 0)
+axis(side = 2, pos = lowlimit, las = 0)
+text(x = textbox_x, y = textbox_y, labels = paste(
+    "mean = ", correlation_mean, "\nse = ", correlation_sd,
+    "\nmax = ", round(max(correlation), digits = 2),
+    "\nmin = ", round(min(correlation), digits = 2),
+    sep = ""), adj = 0)
+```
