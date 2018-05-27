@@ -53,7 +53,7 @@ plot(d$income, d$musicality,
 abline(lm(d$musicality ~ d$income), col = "red")
 ```
 
-<img src="practice2_files/figure-markdown_github/unnamed-chunk-4-1.png" width="672" />
+<img src="practice2_files/figure-markdown_github/b-1.png" width="672" />
 
 ### Testing the significance of a correlation coefficient
 

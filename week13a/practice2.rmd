@@ -27,7 +27,7 @@ correlation <- round(results$estimate, digits = 3)
 p_value <- round(results$p.value, digits = 3)
 ```
 
-```{r}
+```{r b}
 plot(d$income, d$musicality,
      main = paste("r = ", correlation, ", p = ", p_value, sep = ""),
      xlab = "income", ylab = "musicality", pch = 19)
