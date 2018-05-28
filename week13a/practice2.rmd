@@ -79,3 +79,29 @@ text(x = textbox_x, y = textbox_y, labels = paste(
     "\nmin = ", round(min(correlation), digits = 2),
     sep = ""), adj = 0)
 ```
+
+```{r}
+d <- read.table("../week11a/Fig9-5.dat", header = TRUE, sep = "")
+cor.test(d$Pace, d$Heart, alternative = "two.sided")
+cor.test(d$Pace, d$Heart, alternative = "greater")
+cor.test(d$Pace, d$Heart, alternative = "less")
+```
+
+### Intercorrelation matrices
+
+```{r}
+d <- read.table("../week12a/SchoolExpend.dat", header = TRUE, sep = "")
+d <- d[, c("Expend", "PTratio", "Salary", "SAT", "ACTcomp", "PctACT", "PctSAT")]
+round(cor(d), digits = 3)
+```
+
+```{r}
+# if (!require("Hmisc")) install.packages("Hmisc")
+Hmisc::rcorr(as.matrix(d))
+```
+
+```{r c}
+d <- read.table("../week12a/SchoolExpend.dat", header = TRUE, sep = "")
+pairs(~ Expend + PTratio + Salary + SAT + ACTcomp + PctACT + PctSAT,
+      data = d, main = "scatterplot matrix")
+```
