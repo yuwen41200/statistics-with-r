@@ -1,0 +1,64 @@
+---
+title: "Week 15 Practice 1"
+author: "Yu-Wen Pu"
+date: "2018-06-05"
+output: github_document
+---
+
+## multiple regression
+
+```{r}
+knitr::opts_chunk$set(fig.retina = 2)
+set.seed(1830)
+```
+
+### read dataset: funding our schools
+
+```{r}
+d <- read.table("Tab11-1.dat", header = TRUE, sep = "")
+dim(d)
+str(d)
+head(d)
+```
+
+```{r}
+library(aplpack)
+stem.leaf(d$Expend, m = 1)
+stem.leaf(d$SATcombined, m = 2)
+stem.leaf(d$PctSAT, m = 1)
+```
+
+### two variable relationships
+
+```{r a}
+ds <- d[, c("Expend", "Salary", "PctSAT", "SATcombined")]
+library(Hmisc)
+rcorr(as.matrix(ds))
+pairs(~ Expend + Salary + PctSAT + SATcombined, data = ds, main = "scatterplot matrix")
+```
+
+### multiple regression
+
+```{r}
+model <- lm(ds$SATcombined ~ ds$Expend + ds$PctSAT)
+model
+str(model)
+summary(model)
+```
+
+```{r}
+y_hat <- model$fitted.values
+cor.test(ds$SATcombined, y_hat)
+```
+
+### control `PctSAT`
+
+```{r}
+modelA <- lm(ds$SATcombined ~ ds$PctSAT)
+modelA$residuals
+modelB <- lm(ds$Expend ~ ds$PctSAT)
+modelB$residuals
+modelC <- lm(modelA$residuals ~ modelB$residuals)
+summary(modelC)
+modelC$coefficients["modelB$residuals"]
+```
