@@ -16,6 +16,7 @@ a) 解釋如下：
   + 在其他條件不變的情況下，`Income` 每增加 1 單位，`Quality of Life` 就會增加 0.05 單位。
   + 在其他條件不變的情況下，`SocSer` 每增加 1 單位，`Quality of Life` 就會增加 0.003 單位。
   + 在其他條件不變的情況下，`Popul` 每增加 1 單位，`Quality of Life` 就會降低 0.01 單位。
+  + 5.37 (intercept) 沒有實際意義。
 b) Quality of Life =
 
 ```{r}
@@ -83,7 +84,7 @@ ds <- d[1:4, ]
 summary(lm(ds$Y ~ ds$X1 + ds$X2 + ds$X3 + ds$X4))
 ```
 
-當資料量太少時，沒有自由度，無法進行多重相關／迴歸分析。
+當資料量太少時，沒有 residual 的自由度，無法進行多重相關／迴歸分析。
 
 ##### 11.24
 
