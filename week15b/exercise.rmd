@@ -1,0 +1,90 @@
+---
+title: "Exercise 10"
+author: "0316213 Yu-Wen Pu"
+date: "2018-06-10"
+output:
+  pdf_document:
+    includes:
+      in_header: ../week03b/header.tex
+    latex_engine: xelatex
+---
+
+##### 11.1
+
+a) 解釋如下：
+  + 在其他條件不變的情況下，`Temp` 每增加 1 單位，`Quality of Life` 就會降低 0.01 單位。
+  + 在其他條件不變的情況下，`Income` 每增加 1 單位，`Quality of Life` 就會增加 0.05 單位。
+  + 在其他條件不變的情況下，`SocSer` 每增加 1 單位，`Quality of Life` 就會增加 0.003 單位。
+  + 在其他條件不變的情況下，`Popul` 每增加 1 單位，`Quality of Life` 就會降低 0.01 單位。
+b) Quality of Life =
+
+```{r}
+5.37 - 0.01 * 55 + 0.05 * 12 + 0.003 * 500 - 0.01 * 200
+```
+
+c) Quality of Life =
+
+```{r}
+5.37 - 0.01 * 55 + 0.05 * 12 + 0.003 * 100 - 0.01 * 200
+```
+
+##### 11.2
+
+a) No, not reliable. 因為 `Rel Inf`、`Rel Invol`、`Rel Hope` 這三個變數很可能高度相關。
+b) Little relationship. 因為 adjusted r square 只有 0.099。
+c) **a** 小題的答案不變，**b** 小題關係可能變強。
+
+##### 11.3
+
+`Rel Inf` 與 `Rel Hope` 都有顯著貢獻。
+
+##### 11.6
+
+```{r}
+d = data.frame(Y = c(5, 0, 5, 9, 4,
+                     8, 3, 7, 0, 4,
+                     7, 1, 4, 7, 9),
+               X1 = c(3, 8, 1, 5, 8,
+                      2, 4, 7, 9, 1,
+                      3, 5, 6, 8, 9),
+               X2 = c(7, 6, 4, 3, 1,
+                      9, 7, 5, 3, 1,
+                      8, 6, 0, 3, 7),
+               X3 = c(1, 7, 4, 1, 8,
+                      8, 6, 8, 3, 6,
+                      1, 9, 7, 7, 7),
+               X4 = c(3, 6, 0, 5, 1,
+                      3, 5, 9, 1, 1,
+                      7, 4, 2, 0, 9))
+```
+
+```{r}
+ds <- d[1:15, ]
+summary(lm(ds$Y ~ ds$X1 + ds$X2 + ds$X3 + ds$X4))
+```
+
+```{r}
+ds <- d[1:10, ]
+summary(lm(ds$Y ~ ds$X1 + ds$X2 + ds$X3 + ds$X4))
+```
+
+```{r}
+ds <- d[1:6, ]
+summary(lm(ds$Y ~ ds$X1 + ds$X2 + ds$X3 + ds$X4))
+```
+
+```{r}
+ds <- d[1:5, ]
+summary(lm(ds$Y ~ ds$X1 + ds$X2 + ds$X3 + ds$X4))
+```
+
+```{r}
+ds <- d[1:4, ]
+summary(lm(ds$Y ~ ds$X1 + ds$X2 + ds$X3 + ds$X4))
+```
+
+當資料量太少時，沒有自由度，無法進行多重相關／迴歸分析。
+
+##### 11.24
+
+當所有 predictor 都為 0 時，$\hat{Y}=\text{intercept}$。因為在現實世界裡幾乎不可能所有 predictor 都為 0，所以我們說 intercept 沒有實際意義。可是如果沒有 intercept，當所有 predictor 都為 0 時，$\hat{Y}=0$ 。整條迴歸線被平移了，將非 0 的值代入迴歸方程式得到的 $\hat{Y}$ 也會增加了 intercept 大小的誤差。
