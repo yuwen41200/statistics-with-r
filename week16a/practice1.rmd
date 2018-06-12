@@ -1,0 +1,99 @@
+---
+title: "Week 16 Practice 1"
+author: "Yu-Wen Pu"
+date: "2018-06-12"
+output: github_document
+always_allow_html: yes
+---
+
+## crawl webpages
+
+```{r}
+knitr::opts_chunk$set(results = "hold", fig.retina = 2)
+set.seed(1830)
+```
+
+### 網頁標題
+
+```{r}
+library(rvest)
+url <- "https://www.ptt.cc/bbs/movie/M.1525705635.A.9D1.html"
+(content <- read_html(url))
+```
+
+```{r}
+(title_node <- html_nodes(content, xpath = "//title"))
+```
+
+```{r}
+(title <- html_text(title_node))
+```
+
+### 作者、標題、時間
+
+```{r}
+(ns <- html_nodes(content, xpath = "//div[@class='article-metaline']"))
+```
+
+```{r}
+(n <- html_nodes(ns[1], xpath = "span[@class='article-meta-value']"))
+```
+
+```{r}
+(t <- html_text(n))
+```
+
+```{r}
+html_text(html_nodes(ns[2], xpath = "span[@class='article-meta-value']"))
+```
+
+```{r}
+html_text(html_nodes(ns[3], xpath = "span[@class='article-meta-value']"))
+```
+
+### 內文
+
+```{r}
+post <- html_text(html_nodes(content, xpath = "//div[@id='main-content']/text()"))
+head(post, n = 3)
+```
+
+```{r}
+post <- paste(post, collapse = "。")
+substr(post, 1, 500)
+```
+
+### 備註：語法說明
+
+```{r}
+x <- 2
+y <- c("a", "b", "c", "d")
+paste(1, x, sep = "+")
+paste(y, collapse = "_")
+paste(1, y, sep = "+", collapse = "_")
+```
+
+### 斷詞
+
+```{r}
+library(jiebaR)
+cut <- worker()
+new_user_word(cut, "薩諾斯", "n")
+words <- cut[post]
+words <- words[nchar(words) > 1]
+head(words)
+```
+
+```{r}
+results <- data.frame(table(words))
+results <- results[order(results$Freq, decreasing = TRUE), ]
+head(results)
+```
+
+### 文字雲
+
+```{r}
+library(wordcloud2)
+results <- results[results$Freq > 1, ]
+wordcloud2(results)
+```
