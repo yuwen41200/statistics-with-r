@@ -1,0 +1,243 @@
+---
+title: "Exam 3"
+author: "0316213 蒲郁文"
+date: "2018-06-19"
+output: html_document
+---
+
+```{r}
+knitr::opts_chunk$set(results = "hold", fig.retina = 2)
+set.seed(1830)
+```
+
+##### 1.1
+
+```{r}
+d <- matrix(c(29, 16, 55, 198, 107, 181), byrow = TRUE, nrow = 2)
+d
+chisq.test(d, correct = FALSE)
+```
+
+是，p 值小於 0.05，表示兩事件不獨立。
+
+##### 1.2
+
+因為 `3+ cycles` 的數量有點多，我會把 `3+ cycles` 拆成 `3 cycles` 與 `4+ cycles`。
+
+##### 1.3
+
+```{r}
+e <- d * 2
+e
+chisq.test(e, correct = FALSE)
+```
+
+X^2 變大，p 值變小。
+
+##### 1.4
+
+資料量愈大愈顯著。
+
+##### 2.1
+
+```{r}
+d <- read.table("E02.dat", header = TRUE, sep = "")
+d$Percent <- d$Down / d$Births * 100
+head(d)
+```
+
+```{r}
+plot(d$Age, d$Percent, main = "Down syndrome as a function of age",
+     xlab = "age", ylab = "Down syndrome (%)", pch = 19)
+```
+
+##### 2.2
+
+它是曲線上升，在 35 歲以前沒有明顯的上升趨勢。
+
+##### 2.3
+
+```{r}
+d$Rank <- rank(d$Percent)
+head(d)
+```
+
+```{r}
+plot(d$Age, d$Rank, main = "Down syndrome as a function of age",
+     xlab = "age", ylab = "Down syndrome (rank)", pch = 19)
+```
+
+```{r}
+cor(d$Age, d$Rank)
+```
+
+是，這是 Spearman's correlation。
+
+##### 3.1 & 3.2
+
+```{r}
+d <- read.table("E03.dat", header = TRUE, sep = "")
+head(d)
+```
+
+```{r}
+plot(d$Height, d$Weight, main = "weight as a function of height",
+     xlab = "height", ylab = "weight", pch = 19)
+abline(lm(d$Weight ~ d$Height), col = "red")
+regress <- lm(d$Weight ~ d$Height)
+b <- round(regress$coefficients[["d$Height"]], digits = 2)
+a <- round(regress$coefficients[["(Intercept)"]], digits = 2)
+legend(66, 200, substitute(
+        paste(hat(Y), " = ", b, " * X + ", a),
+        list(b = b, a = a)
+    ), bty = "n")
+```
+
+身高每增加一單位，體重就會增加 4.36 單位。  
+截距沒有特殊意義，只是用來平移迴歸線，使預測值的平均等於觀察到的體重的平均。
+
+##### 3.3 & 3.4
+
+```{r}
+cor.test(d$Height, d$Weight)
+```
+
+相關係數為 0.6036796。是的，p 值小於 0.05。  
+（當只有一個 predictor 時，對相關係數的檢定與對斜率的檢定，結果是一樣的。）
+
+##### 4.1 & 4.2
+
+```{r}
+d <- read.table("E04.dat", header = TRUE, sep = "")
+head(d)
+```
+
+```{r}
+plot(d$Height, d$Weight, main = "weight as a function of height",
+     xlab = "height", ylab = "weight", pch = 19)
+abline(lm(d$Weight ~ d$Height), col = "red")
+regress <- lm(d$Weight ~ d$Height)
+b <- round(regress$coefficients[["d$Height"]], digits = 2)
+a <- round(regress$coefficients[["(Intercept)"]], digits = 2)
+legend(62, 150, substitute(
+        paste(hat(Y), " = ", b, " * X + ", a),
+        list(b = b, a = a)
+    ), bty = "n")
+```
+
+身高每增加一單位，體重就會增加 2.58 單位。  
+截距沒有特殊意義，只是用來平移迴歸線，使預測值的平均等於觀察到的體重的平均。
+
+##### 4.3 & 4.4
+
+```{r}
+cor.test(d$Height, d$Weight)
+```
+
+相關係數為 0.4942129。是的，p 值小於 0.05。  
+（當只有一個 predictor 時，對相關係數的檢定與對斜率的檢定，結果是一樣的。）
+
+##### 5.1
+
+```{r}
+y_hat <- 4.36 * 71 + -149.93
+cat("predicted:", y_hat, fill = TRUE)
+cat("residual:", 166 - y_hat, fill = TRUE)
+```
+
+##### 5.2
+
+可能是年齡造成的誤差。學生的年齡與被預測者不同，而年齡可能也會影響體重。
+
+##### 6.1 & 6.2
+
+```{r}
+d <- read.table("E06.dat", header = TRUE, sep = "")
+d
+```
+
+```{r}
+plot(d$Boys ~ d$HoursTV, ylim = c(240, 300), col = "blue", xlab = "Hours watching TV",
+     ylab = "NAEP Mathematics score")
+abline(lm(d$Boys ~ d$HoursTV), col = "blue")
+
+regress <- lm(d$Boys ~ d$HoursTV)
+b <- round(regress$coefficients[["d$HoursTV"]], digits = 2)
+a <- round(regress$coefficients[["(Intercept)"]], digits = 2)
+legend(4, 300, substitute(
+        paste(hat(Y), " = ", b, " * X + ", a),
+        list(b = b, a = a)
+    ), bty = "n", text.col = "blue")
+
+par(new = TRUE)
+
+plot(d$Girls ~ d$HoursTV, ylim = c(240, 300), col = "red", xlab = "Hours watching TV",
+     ylab = "NAEP Mathematics score")
+abline(lm(d$Girls ~ d$HoursTV), col = "red")
+
+regress <- lm(d$Girls ~ d$HoursTV)
+b <- round(regress$coefficients[["d$HoursTV"]], digits = 2)
+a <- round(regress$coefficients[["(Intercept)"]], digits = 2)
+legend(4, 290, substitute(
+        paste(hat(Y), " = ", b, " * X + ", a),
+        list(b = b, a = a)
+    ), bty = "n", text.col = "red")
+```
+
+藍色代表男生，紅色代表女生。
+
+對男生而言，觀看電視的時間每增加一單位，數學成績就會減少 4.82 單位。  
+對女生而言，觀看電視的時間每增加一單位，數學成績就會減少 3.46 單位。  
+截距沒有特殊意義，只是用來平移迴歸線，使預測值的平均等於觀察到的數學成績的平均。
+
+##### 6.3
+
+不行。依據以上分析，觀看電視的時間與數學成績呈負相關；假如男生觀看電視的時間比女生更久，那麼男生的數學成績應該比女生差。可是依據以上資料，男生的數學成績高於女生。
+
+##### 7.1
+
+```{r}
+d <- read.table("E07.dat", header = TRUE, sep = "")
+head(d)
+```
+
+```{r}
+model1 <- lm(d$Weight ~ d$Height)
+model2 <- lm(d$Weight ~ d$Height + d$Sex)
+```
+
+```{r}
+summary(model1)
+summary(model2)
+```
+
+在多重迴歸中，體重仍然會隨著身高的增加而增加，但增加的幅度沒有那麼大了。  
+（在性別不變的情況下，身高每增加一單位，體重只會增加 3.6911 單位。）  
+「性別」的迴歸係數將近 -15，表示在身高不變的情況下，「性別」欄位由 1（男性）轉變為 2（女性），體重就會降低 15 單位左右。可見女性的體重普遍低於男性。
+
+##### 7.2
+
+```{r}
+d_male <- d[d$Sex == "1", ]
+d_female <- d[d$Sex == "2", ]
+model_male <- lm(d_male$Weight ~ d_male$Height)
+model_female <- lm(d_female$Weight ~ d_female$Height)
+```
+
+```{r}
+summary(model_male)
+summary(model_female)
+```
+
+##### 7.3
+
+```{r}
+weighted_slope <- (dim(d_male)[1] * model_male$coefficients[["d_male$Height"]] +
+                   dim(d_female)[1] * model_female$coefficients[["d_female$Height"]]) /
+                  (dim(d_male)[1] + dim(d_female)[1])
+dim(d_male)[1] + dim(d_female)[1] == dim(d)[1]
+weighted_slope
+```
+
+加權平均後的斜率（3.67984）非常接近多重迴歸中身高的迴歸係數（3.6911）。  
+這樣的結果符合預期，因為這兩種計算迴歸係數的方法都有控制性別。
